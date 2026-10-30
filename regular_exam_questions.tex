@@ -1,0 +1,110 @@
+\documentclass{jlreq}
+\usepackage[top=15mm,bottom=15mm,left=15mm,right=15mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathrsfs,bm}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+
+% 定理環境など
+\theoremstyle{definition}
+\newtheorem*{question}{}
+
+% 数式番号非表示
+\makeatletter
+\renewcommand{\theequation}{\arabic{equation}}
+\makeatother
+
+\begin{document}
+\title{2025年度 数学 学年末試験 問題用紙}
+\date{}
+\author{}
+\maketitle
+
+\section*{【注意事項】}
+\begin{itemize}
+    \item \textbf{大問1}は必答．答えのみを解答用紙に記入すること．
+    \item \textbf{大問2}は \textbf{a, b, c} の3つのうち1つを選択して解答すること．\footnote{2つ以上を解答した場合は，点数の最も高いものを採用する．}
+    \item \textbf{大問2}に関しては，答えだけでなく，途中式や考え方も記述すること．最終結果には下線を引くなど，わかりやすいようにすること．
+\end{itemize}
+\hrule
+\vspace{10mm}
+
+% === 大問1 ===
+\noindent\textbf{\large [1] 小問集合 }\\
+
+以下の問いに答えよ．
+
+\begin{enumerate}[label=(\arabic*)]
+    \item{[5点]} $4x^2-y^2+2y-1$ を因数分解せよ．
+    \vspace{3mm}
+    \item{[5点]} 3辺の長さが $7, 8, 13$ である三角形の面積 $S$ を求めよ．
+    \vspace{3mm}
+    \item{[5点]} 3次方程式 $2x^3+7x^2+2x-3=0$ を解け．
+    \vspace{3mm}
+    \item{[5点]} 点 $(3,-4)$ と直線 $5x-7y+1=0$ の距離を求めよ．
+    \vspace{3mm}
+    \item{[5点]} 不等式 $\sqrt{3}\sin x-\cos x\leqq \sqrt{3}$ を解け．ただし，$0\leqq x< 2\pi$ とする．
+    \vspace{3mm}
+    \item{[5点]} $6^{20}$ は何桁の数か．ただし，$\log_{10} 2=0.3010, \log_{10} 3=0.4771$ とする．
+    \vspace{3mm}
+    \item{[5点]} 2つのベクトル $\vec{a}=(2,0,-1)$, $\vec{b}=(1,3,-2)$ の両方に垂直で，大きさが $\sqrt{6}$ のベクトル $\vec{p}$ を求めよ． 
+    \vspace{3mm}
+    \item{[5点]} $a_1=2$, $2a_{n+1}=a_n+1$ によって定められる数列 $\{a_n\}$ の一般項を求めよ．ただし，$n=1, 2, 3, \cdots $ とする．
+    \vspace{3mm}
+    \item{[5点]} 方程式 $z^4=8(-1+\sqrt{3}i )$ を解け．ただし，$z$ は複素数である．
+    \vspace{3mm}
+    \item{[5点]} 極限 $\displaystyle\lim_{x \to -\infty} (\sqrt{x^2+1}+x)$ を求めよ．
+\end{enumerate}
+
+\newpage
+
+% --- 2a ---
+\noindent\textbf{\large [2a] 確率・期待値 (The “St. Petersburg paradox.”)}
+
+コインを投げ続け，表が出た時点でゲームを終了し，賞金がもらえるゲームを考える．コインの表裏が出る確率はそれぞれ $\displaystyle \frac{1}{2}$ であるとする．
+1回目に表が出たら1円，1回目は裏で2回目に初めて表が出たら2円，$\dots$，$(k-1)$ 回目まで裏が出て，$k$ 回目に初めて表が出た場合，$2^{k-1}$ 円の賞金がもらえるものとする．
+以下の問いに答えよ．
+
+\begin{enumerate}[label=(\arabic*)]
+    \item {[10点]} 1000円以上もらえる確率を求めよ．
+    \item {[12点]} このゲームの主催者の全財産に上限がない（すなわち，全財産が無限にあるとする）と仮定すると，もらえる賞金の期待値はいくらになるか．
+    \item {[16点]} 現実には，主催者の全財産には限りがある．このゲームの主催者の全財産が1億円であるとする．この時，主催者が賞金を確実に支払うことのできる最大のコインを投げられる回数と，その回数におけるもらえる賞金の期待値を求めよ．
+                   ただし，$\log_{10}2=0.3010$とし，コインを最大回数投げて一度も表が出なかったら，賞金は0円とする．
+    \item {[12点]} (1)，(2)，(3)での議論を踏まえ，あなた自身はこのゲームに参加したいと思うか．理由とともに答えよ．
+\end{enumerate}
+
+\vspace{10mm}
+\hrule
+\vspace{10mm}
+
+% --- 2b ---
+\noindent\textbf{\large [2b] 微分積分 (Wallis Integrals)}
+
+$I_n$を以下のように定める．次の問いに答えよ．
+\[I_n = \int_0^{\frac{\pi}{2}} \sin^n x \, dx\]
+
+\begin{enumerate}[label=(\arabic*)]
+    \item {[5点]} $I_0$ と $I_1$ の値を求めよ．
+    \item {[10点]} $n \geqq 2$ のとき，等式 $\displaystyle I_n = \frac{n-1}{n} I_{n-2}$ が成り立つことを示せ．
+    \item {[20点]} 数列 $\{ n I_n I_{n-1} \}$ が $n$ によらない一定の値をとることを示し，その値を求めよ．さらに，それを利用して極限 $\displaystyle \lim_{n \to \infty} \sqrt{n} I_n$ の値を求めよ．
+    \item {[15点]} $I_n$ の値を求めよ．
+\end{enumerate}
+
+\vspace{10mm}
+\hrule
+\vspace{10mm}
+
+% --- 2c ---
+\noindent\textbf{\large [2c] 複素数平面}
+
+複素数平面上に 2点 $\mathrm{A}(1), \mathrm{B}(3+2i)$ がある．
+点 $z$ を点 $\mathrm{A}$ を中心として $\displaystyle\frac{\pi}{4}$ だけ回転し，さらに点 $\mathrm{A}$ からの距離を $\sqrt{2}$ 倍した点を $w$ とする．
+このとき，以下の問いに答えよ．
+
+\begin{enumerate}[label=(\arabic*)]
+    \item {[10点]} $w$ を $z$ を用いて表せ．
+    \item {[5点]} 点 $z$ が点 $\mathrm{B}$ と一致するとき，$w$ が表す複素数を求めよ．
+    \item {[14点]} 点 $z$ が，点$2$を中心とする半径 $1$ の円周上を動くとき，点 $w$ はどのような図形を描くか．その図形の名称と方程式を求め，複素数平面上に図示せよ．
+    \item {[21点]} (3)の図形上の点を $\mathrm{P}(w)$ とする．原点 $\mathrm{O}$ から点 $\mathrm{P}$ に引いた接線の接点を表す複素数を求めよ．
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,769 @@
+\documentclass[a4paper,11pt,uplatex,dvipdfmx]{jsarticle}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathrsfs}
+\usepackage[margin=25mm]{geometry}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{pxjahyper}  
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,angles,quotes}
+\hypersetup{colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{claim}[theorem]{Claim}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+\renewcommand{\proofname}{Proof}
+
+\DeclareMathOperator{\var}{var}
+
+\title{Hewitt-Savage 0-1 Law}
+\author{竹野拓夢}
+\date{}
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+本レポートでは\cite{Durrett}にあるHewitt-Savage 0-1 Law を題材に，より証明を深く理解することを目的とする．
+本編に入る前に\S\ref{sec:results}で証明に必要な事実をまとめる．その後，\S\ref{sec:statement}で
+主張とその証明の鍵となる補題を述べたうえで，\cite{Durrett}に書かれている証明を\S\ref{sec:proof}で述べる．
+そして，\S\ref{sec:split}で証明を平易な言葉で説明し，それを基に証明全体を細かく補題に分ける．
+最後に\S\ref{sec:directly}では，前章で分けた補題を直接数式で表現し，前章の補題の根拠を述べる．
+\end{abstract}
+
+\tableofcontents
+
+\vspace{3mm}
+以下では，\cite{Durrett}に従い，$\Omega=S^{\mathbb{N}}$，$X_i(\omega)=\omega_i$とする．有限置換$\pi$に対して，
+\[
+  (\pi\omega)_i=\omega_{\pi(i)}
+\]
+と定める．このとき，
+\[
+  X_i(\pi\omega)=X_{\pi(i)}(\omega)
+\]
+が成り立つため，$\pi$による標本点の座標の置換は，確率変数 \(X_1,X_2,\ldots\) の置換に対応する．以下ではこの \(\pi\) を用いて，
+有限個の座標の置換に対する不変性を表す．
+
+また，$\mathcal{E}_n$を，$n+1,n+2,\ldots$を固定する置換に対して不変な事象が生成する$\sigma$-加法族とし，
+\[
+  \mathcal{E}=\bigcap_{n=1}^\infty \mathcal{E}_n
+\]
+とする．ただし，事象 $A$ が $\pi$ に対して不変であるとは，$\pi^{-1}A:=\{\omega:\pi\omega\in A\}=A$ となることをいう．
+
+
+\section{用いる既知の結果}\label{sec:results}
+
+証明で用いる事実を明示しておく．
+
+\begin{theorem}[$\pi$-$\lambda$ theorem]\label{thm:pi-lambda}
+$\mathcal{P}$が$\pi$-system ，$\mathcal{L}$が$\lambda$-system かつ$\mathcal{P}\subset \mathcal{L}$ならば，
+$\sigma(\mathcal{P})\subset\mathcal{L}$．
+\end{theorem}
+
+\begin{theorem}\label{thm:backwards-convergence}
+$Y\in L^1$とし，$n \downarrow -\infty$で$\mathcal{F}_n \downarrow \mathcal{F}_{-\infty}$となるとする．このとき，
+\[E(Y |\mathcal{F}_n) \longrightarrow E(Y |\mathcal{F}_{-\infty}) \quad \text{a.s. and in} \ L^1．\]
+\end{theorem}
+
+\begin{theorem}\label{thm:contraction}
+$p\ge1$とする．$E|X|^p<\infty$ ならば $E\bigl|E(X\mid\mathcal{G})\bigr|^p\le E|X|^p$．
+\end{theorem}
+
+\begin{theorem}\label{thm:projection}
+$EX^2<\infty$ のとき，$E(X\mid\mathcal{F})$ は $2$乗平均誤差 $E(X-Z)^2$ を最小にする $\mathcal{F}$-可測な確率変数$Z$であり，
+$L^2$ の意味で $X$ の閉部分空間 $L^2(\mathcal{F})$ への直交射影である．
+\end{theorem}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.05,>=Stealth]
+% L^2(F) を表す平面
+\fill[gray!12] (-3.4,-1.3) -- (3.8,-1.3) -- (4.8,1.2) -- (-2.4,1.2) -- cycle;
+\draw[gray!55]  (-3.4,-1.3) -- (3.8,-1.3) -- (4.8,1.2) -- (-2.4,1.2) -- cycle;
+\node[gray!60!black,anchor=north west] at (-3.3,-1.35)
+  {$L^2(\mathcal{F})$：$\mathcal{F}$-可測な確率変数の全体};
+% 点
+\coordinate (O)  at (-2.0,-0.45);
+\coordinate (Y)  at (0.5,0.15);
+\coordinate (X)  at (0.5,2.75);
+\coordinate (Yp) at (3.2,-0.6);
+% ベクトル
+\draw[->,thick] (O) -- (X);
+\draw[->,thick] (O) -- (Y);
+% 垂線と直角記号
+\draw[dashed,thick] (X) -- (Y) node[midway,right=3pt] {$X-E(X\mid\mathcal{F})$};
+\draw (Y) ++(0,0.40) -- ++(-0.40,0) -- ++(0,-0.40);
+% 別の候補への誤差
+\draw[dashed,gray!65!black] (X) -- (Yp)
+  node[pos=0.5,right=2pt,gray!45!black] {$X-Z$};
+% 点とラベル
+\fill (X) circle (2pt); \fill (Y) circle (2pt);
+\fill[gray!60!black] (Yp) circle (1.8pt); \fill (O) circle (1.5pt);
+\node[anchor=south] at (X) {$X$};
+\node[anchor=north west] at ([xshift=4pt,yshift=-4pt]Y) {$E(X\mid\mathcal{F})$};
+\node[anchor=west,gray!45!black] at ([xshift=3pt]Yp) {$Z$};
+\node[anchor=east] at ([xshift=-3pt]O) {$0$};
+\end{tikzpicture}
+\caption{$E(X\mid\mathcal{F})$ は $X$ から $L^2(\mathcal{F})$ への垂線の足}
+\label{fig:projection}
+\end{figure}
+
+\section{主張}\label{sec:statement}
+
+\begin{theorem}[Hewitt-Savage 0-1 Law]\label{thm:HS}
+$X_1,X_2,\dots$ が i.i.d. ならば，$A\in\mathcal{E}$ に対して $P(A)\in\{0,1\}$．
+\end{theorem}
+
+この定理の証明の鍵となるのが次の補題である．
+
+\begin{lemma}\label{lem:permutation}
+$X_1,X_2,\dots$ を i.i.d. とする．ここで，
+\[
+  A_n(\varphi):=\frac{1}{(n)_k}\sum_{i}\varphi(X_{i_1},\dots,X_{i_k})
+\]
+とおく．ただし，和は，$1\le i_1,\dots,i_k\le n$を満たす異なる整数すべてについてとる．また，
+\[(n)_k=n(n-1)\cdots(n-k+1)\]
+である．このとき，$\varphi$が有界ならば，
+\[A_n(\varphi)\longrightarrow E\varphi(X_1,\dots,X_k)\quad \text{a.s.}\]
+が成り立つ．
+\end{lemma}
+
+\section{証明}\label{sec:proof}
+\subsection{Lemma \ref{lem:permutation}の証明}
+
+\begin{proof}[Proof of Lemma \ref{lem:permutation}]
+$A_n(\varphi)$ はすべての順列についての平均なので，最初の $n$ 個の変数を並び替えても不変である．
+ゆえに $A_n(\varphi)\in\mathcal{E}_n$である．よって，
+\[
+  A_n(\varphi)=E\bigl(A_n(\varphi)\mid\mathcal{E}_n\bigr)
+  =\frac{1}{(n)_k}\sum_{i}E\bigl(\varphi(X_{i_1},\dots,X_{i_k})\mid\mathcal{E}_n\bigr)
+  \overset{(\ast)}{=}E\bigl(\varphi(X_1,\dots,X_k)\mid\mathcal{E}_n\bigr)
+\]
+が成立．ただし，$(\ast)$ について，どの $k$ 個をえらんでも条件付き期待値は同じである．
+その中から代表して最初の$k$個をもってきている．すべての順列について値が同じものを総数で割っているから，これはひとつ分にほかならない．
+
+Theorem \ref{thm:backwards-convergence} より，$\mathcal{F}_{-m}=\mathcal{E}_m\ (m\ge1)$ とすると
+$\mathcal{E}_1\supset\mathcal{E}_2\supset\mathcal{E}_3\supset\cdots$ で $\mathcal{E}_m\downarrow\mathcal{E}\ (m\to\infty)$ だから
+\[
+  E\bigl(\varphi(X_1,\dots,X_k)\mid\mathcal{E}_n\bigr)\longrightarrow
+  E\bigl(\varphi(X_1,\dots,X_k)\mid\mathcal{E}\bigr)\quad\text{a.s.}
+\]
+この極限値が $E\varphi(X_1,\dots,X_k)$ と等しいことを示したい．
+
+ここで，$A_n(\varphi)$ の中に $X_1$ を含む項（$i_1,\dots,i_k$ に $1$ が含まれるもの）が
+どのくらいの割合で存在するのかを調べる．
+\begin{itemize}
+  \item $i_1,\dots,i_k$ の $k$ 個の整数の中に $1$ を入れるのは $k$ 通り．
+  \item 残りの $k-1$ 個に $2,\dots,n$ の $n-1$ 個の整数からえらんで並べるのは $(n-1)_{k-1}$ 通り．
+\end{itemize}
+よって $X_1$ を含む項が全体に占める割合は，
+\[
+  \frac{k(n-1)_{k-1}}{(n)_k}=\frac{k}{n}
+\]
+である．したがって，$1\in i$ となる項だけを集めた和について，$\varphi$が有界であることから，
+\[
+  \left|\frac{1}{(n)_k}\sum_{1\in i}\varphi(X_{i_1},\dots,X_{i_k})\right|
+  \le\frac{k}{n}\sup|\varphi|\longrightarrow0\qquad(n\to\infty)
+\]
+となる．よって，$A_n(\varphi)$ は，$X_1$を含む項の寄与が極限では消えるので，
+\[
+  E\bigl(\varphi(X_1,\dots,X_k)\mid\mathcal{E}\bigr)\in\sigma(X_2,X_3,\dots)
+\]
+となる．この議論を $X_2,X_3,\dots,X_k$ に対しても同様に行うと，
+\[
+  E\bigl(\varphi(X_1,\dots,X_k)\mid\mathcal{E}\bigr)\in\sigma(X_{k+1},X_{k+2},\dots)
+\]
+となる．
+
+直観的に，確率変数の条件付き期待値がその確率変数自身と独立なら，
+\begin{equation}\label{eq:durrett-(a)}
+  E\bigl(\varphi(X_1,\dots,X_k)\mid\mathcal{E}\bigr)=E\varphi(X_1,\dots,X_k)
+\end{equation}
+となる．これを正当化するのに，次のLemma \ref{lem:durrett-(b)}を示す．
+
+\begin{lemma}\label{lem:durrett-(b)}
+$EX^2<\infty$，$E(X\mid\mathcal{G})\in\mathcal{F}$であって，$X$ は $\mathcal{F}$ と独立ならば
+$E(X\mid\mathcal{G})=EX$．
+\end{lemma}
+
+\begin{proof}[Proof of Lemma \ref{lem:durrett-(b)}]
+$Y=E(X\mid\mathcal{G})$ とおく．Theorem \ref{thm:contraction}より，
+\[
+  EY^2=E\bigl(\bigl|E(X\mid\mathcal{G})\bigr|^2\bigr)\le EX^2<\infty .
+\]
+$Y\in\mathcal{F}$ かつ $X$ は $\mathcal{F}$ と独立より，$X$ と $Y$ は独立．
+また tower property から
+\[
+  EY=E\bigl[E(X\mid\mathcal{G})\bigr]=EX
+\]
+が成り立つので，
+\[
+  EXY=EX\,EY=(EY)^2
+\]
+を得る．また，Theorem \ref{thm:projection}より $E(X-Y)Y=0$\ ($Y$は最も誤差が少ない予測)，すなわち $EXY=EY^2$．
+ゆえに
+\[
+  \var(Y)=EY^2-(EY)^2=EXY-EXY=0
+\]
+となる．分散が $0$ の確率変数は定数．すなわち $Y=E(X\mid\mathcal{G})=EX$．
+\end{proof}
+
+したがって，Lemma \ref{lem:durrett-(b)}の$X=\varphi(X_1,\dots,X_k)$，$\mathcal{G}=\mathcal{E}$，
+$\mathcal{F}=\sigma(X_{k+1},X_{k+2},\dots)$ とすれば \eqref{eq:durrett-(a)} が成立する．
+ゆえに
+\[
+  A_n(\varphi)\longrightarrow E\varphi(X_1,\dots,X_k)\quad\text{a.s.}
+\]
+\end{proof}
+
+\subsection{Theorem \ref{thm:HS}の証明}
+
+\begin{proof}[Proof of Theorem \ref{thm:HS}]
+\eqref{eq:durrett-(a)} が任意の有界な $\varphi$ で成り立つから，$\mathcal{E}$ と
+$\mathcal{G}_k=\sigma(X_1,\dots,X_k)$ は独立である．すなわち，
+\begin{equation}\label{eq:independent}
+  \forall A\in\mathcal{E},\ \forall B\in\mathcal{G}_k,\qquad P(A\cap B)=P(A)P(B).
+\end{equation}
+これは任意の $k$ で成り立っている．これを
+$\sigma(X_1,X_2,\dots)=\sigma\bigl(\bigcup_k\mathcal{G}_k\bigr)$ に拡張したい．
+そこで Theorem \ref{thm:pi-lambda}を用いる．
+
+$A\in\mathcal{E}$ を固定し
+\[
+  \mathcal{L}=\Bigl\{B\in\sigma\Bigl(\bigcup_k\mathcal{G}_k\Bigr)\ \Big|\ P(A\cap B)=P(A)P(B)\Bigr\}
+\]
+とおく．
+
+\begin{claim}\label{cl:pi-system}
+$\bigcup_k\mathcal{G}_k$ は $\pi$-system である．
+\end{claim}
+
+\begin{proof}[Proof of Claim \ref{cl:pi-system}]
+$\mathcal{G}_k=\sigma(X_1,\dots,X_k)\subset\sigma(X_1,\dots,X_{k+1})=\mathcal{G}_{k+1}$ より，
+$\mathcal{G}_1\subset\mathcal{G}_2\subset\cdots$ は増大列である．
+ここで，$B_1,B_2\in\bigcup_k\mathcal{G}_k$ とすると，ある $j,l$ が存在して
+$B_1\in\mathcal{G}_j$，$B_2\in\mathcal{G}_l$ となる．$m=\max\{j,l\}$ とおけば，
+$\mathcal{G}_k$が増大列であることから，$B_1,B_2\in\mathcal{G}_m$ となる．
+$\mathcal{G}_m$ は $\sigma$-加法族なので $B_1\cap B_2\in\mathcal{G}_m\subset\bigcup_k\mathcal{G}_k$．
+ゆえに $\bigcup_k\mathcal{G}_k$ は$\pi$-system である．
+\end{proof}
+
+\begin{claim}\label{cl:subset}
+$\bigcup_k\mathcal{G}_k\subset\mathcal{L}$．
+\end{claim}
+
+\begin{proof}[Proof of Claim \ref{cl:subset}]
+$B\in\bigcup_k\mathcal{G}_k$ とすると，ある $k$ について $B\in\mathcal{G}_k$ である．
+このとき $B\in\mathcal{G}_k\subset\sigma\bigl(\bigcup_k\mathcal{G}_k\bigr)$ であり，
+固定した $A\in\mathcal{E}$ に対して \eqref{eq:independent} より $P(A\cap B)=P(A)P(B)$ が成り立つ．
+ゆえに $B\in\mathcal{L}$ であり，$\bigcup_k\mathcal{G}_k\subset\mathcal{L}$．
+\end{proof}
+
+\begin{claim}\label{cl:lambda-system}
+$\mathcal{L}$ は $\lambda$-system である．
+\end{claim}
+
+\begin{proof}[Proof of Claim \ref{cl:lambda-system}]
+(i) $\Omega\in\mathcal{L}$：
+
+\[P(A\cap\Omega)=P(A)=P(A)\cdot1=P(A)P(\Omega)\]
+
+(ii) $B_1,B_2\in\mathcal{L}$，$B_1\subset B_2$ $\Rightarrow$ $B_2-B_1\in\mathcal{L}$：
+
+$B_1\subset B_2$ より $A\cap B_1\subset A\cap B_2$ だから
+\[
+  P\bigl(A\cap(B_2-B_1)\bigr)=P\bigl((A\cap B_2)-(A\cap B_1)\bigr)
+  =P(A\cap B_2)-P(A\cap B_1)
+\]
+$B_1,B_2\in\mathcal{L}$ より
+\[
+  =P(A)P(B_2)-P(A)P(B_1)=P(A)\bigl(P(B_2)-P(B_1)\bigr)=P(A)P(B_2-B_1).
+\]
+
+(iii) $B_n\in\mathcal{L}$ かつ $B_n\uparrow B$ $\Rightarrow$ $B\in\mathcal{L}$：
+
+$B_n\uparrow B$ より $A\cap B_n\uparrow A\cap B$ だから
+\[
+  P(A\cap B_n)\uparrow P(A\cap B)\quad\text{かつ}\quad P(B_n)\uparrow P(B).
+\]
+ゆえに $B_n\in\mathcal{L}$ より $P(A\cap B_n)=P(A)P(B_n)$ の両辺を $n\to\infty$ とすれば
+$P(A\cap B)=P(A)P(B)$．
+\end{proof}
+
+したがって Theorem \ref{thm:pi-lambda}より，
+\[
+  \sigma\Bigl(\bigcup_k\mathcal{G}_k\Bigr)\subset\mathcal{L}
+\]
+となる．$A\in\mathcal{E}$ は任意だったから，$\mathcal{E}$ と $\sigma\bigl(\bigcup_k\mathcal{G}_k\bigr)$ は独立である．
+一方，$\mathcal{E}\subset\sigma\bigl(\bigcup_k\mathcal{G}_k\bigr)=\sigma(X_1,X_2,\dots)$ だから，
+$A\in\mathcal{E}$ は $A\in\mathcal{L}$ を満たし，$A$ は $A$ 自身と独立である．
+ 
+したがって，
+\[
+  P(A)=P(A\cap A)=P(A)P(A)=P(A)^2\ \Longrightarrow\ P(A)\in\{0,1\}.
+\]
+\end{proof}
+
+\section{平易な言葉で説明できる補題に分ける}\label{sec:split}
+
+\subsection{証明全体の筋道}
+
+証明の核心は，極限 $E(\varphi(X_1,\dots,X_k)\mid\mathcal{E})$ を二通りに見ることにある．
+一方でこれは $\varphi(X_1,\dots,X_k)$ の最良の予測であり，
+他方でこれは $\varphi(X_1,\dots,X_k)$ とは無関係な変数だけで決まっている．
+相手と無関係なまま最良の予測になれるのは定数だけなので，極限は定数になる．
+あとはこれを事象の言葉に直せばよい．
+以下，括弧内は対応する補題である．
+
+\paragraph{極限を作る．}
+$X_1,\dots,X_n$ から $k$ 個を取り出して $\varphi$ を計算し，取り出し方すべてで平均して $A_n(\varphi)$ を作る．
+番号をつけ替えても $A_n(\varphi)$ は変わらない（Lemma \ref{lem:sym}）．
+また，取り出す $k$ 個を取り替えても $\mathcal{E}_n$ で条件付けた値は変わらない（Lemma \ref{lem:same}）．
+この2つから，$A_n(\varphi)$ は $\varphi(X_1,\dots,X_k)$ の $\mathcal{E}_n$ による条件付き期待値に
+書き換えられる（Lemma \ref{lem:rewrite}）．
+$n\to\infty$ にして極限をとると，$E(\varphi(X_1,\dots,X_k)\mid\mathcal{E})$ が得られる（Lemma \ref{lem:conv}）．
+
+\paragraph{最初の $k$ 個を消す．}
+$A_n(\varphi)$ の項のうち，ある1つの標本を使うものは全体の $k/n$ しかない（Lemma \ref{lem:count}）．
+そこで $X_1,\dots,X_k$ のどれかを使う項を全部捨てる．
+捨てた分は高々 $k^2/n$ なので，残りも同じ極限に近づく（Lemma \ref{lem:approx}）．
+残りは $X_{k+1},X_{k+2},\dots$ だけでできているから，
+極限も $\sigma(X_{k+1},X_{k+2},\dots)$-可測になる（Lemma \ref{lem:tail}）．
+
+\paragraph{定数に潰す．}
+$X_1,\dots,X_k$ と $X_{k+1},X_{k+2},\dots$ は独立なので，極限は $\varphi(X_1,\dots,X_k)$ と独立である．
+一方で極限は，$\mathcal{E}$ から得られる情報を使った $\varphi(X_1,\dots,X_k)$ の最良の予測である．
+最良の予測がその相手と独立なら，それは定数しかありえない（Lemma \ref{lem:independent-projection}）．
+よって極限は定数 $E\varphi(X_1,\dots,X_k)$ に潰れる（Lemma \ref{lem:constant}）．
+
+\paragraph{事象の言葉に直す．}
+$\varphi$ として事象の指示関数をとると，これは $\mathcal{E}$ と $\mathcal{G}_k=\sigma(X_1,\dots,X_k)$ が
+独立だという主張になる（Lemma \ref{lem:independent-k}）．
+$k$ を動かして，この独立性を $\sigma(X_1,X_2,\dots)$ 全体に広げる（Lemma \ref{lem:independent-all}）．
+$\mathcal{E}$ はその中に入っているので，$A\in\mathcal{E}$ は自分自身と独立になり，
+$P(A)=P(A)^2$ から $P(A)\in\{0,1\}$ が従う（Lemma \ref{lem:self}）．
+
+以下では，この各文をそれぞれ一つの補題として述べる．
+
+\subsection{各補題に分割する}
+
+\begin{lemma}\label{lem:sym}
+$n\ge k$ とする．$\{1,\dots,n\}$ の任意の置換 $\pi$ に対して
+\[
+  A_n(\varphi)\circ\pi=A_n(\varphi).
+\]
+すなわち $A_n(\varphi)\in\mathcal{E}_n$．
+\end{lemma}
+
+番号をつけ替えても $A_n(\varphi)$ の値が変わらないことを確かめる．
+取り出し方の一覧が入れ替わるだけだからである．
+
+\begin{lemma}\label{lem:same}
+$n\ge k$ のとき，$1\le i_1,\dots,i_k\le n$ を満たす相異なる $i_1,\dots,i_k$ に対して，
+\[
+  E\bigl(\varphi(X_{i_1},\dots,X_{i_k})\mid\mathcal{E}_n\bigr)
+  =E\bigl(\varphi(X_1,\dots,X_k)\mid\mathcal{E}_n\bigr).
+\]
+\end{lemma}
+
+取り出す $k$ 個を別の $k$ 個に取り替えても，$\mathcal{E}_n$ で条件付けた値は変わらないことを確かめる．
+
+\begin{lemma}\label{lem:rewrite}
+$n\ge k$ のとき，
+\begin{equation}\label{eq:star}
+  A_n(\varphi)=E\bigl(\varphi(X_1,\dots,X_k)\mid\mathcal{E}_n\bigr).
+\end{equation}
+\end{lemma}
+
+$A_n(\varphi)$ を，$\varphi(X_1,\dots,X_k)$ を $\mathcal{E}_n$ で条件付けたものに書き換える．
+
+\begin{lemma}\label{lem:conv}
+\[
+  A_n(\varphi)\longrightarrow E\bigl(\varphi(X_1,\dots,X_k)\mid\mathcal{E}\bigr)\quad\text{a.s.}
+\]
+\end{lemma}
+
+$n$ を大きくして，書き換えたものの極限をとる．
+
+\begin{lemma}\label{lem:count}
+$1\le j\le n$ とする．$i_1,\dots,i_k$ に $j$ が含まれる項は $k(n-1)_{k-1}$ 個あり，
+\[
+  \frac{k(n-1)_{k-1}}{(n)_k}=\frac{k}{n}.
+\]
+\end{lemma}
+
+取り出し方のうち，ある1つの標本を使うものがどれだけあるかを数える．
+
+\begin{lemma}\label{lem:approx}
+$n\ge2k$ とし，$X_1,\dots,X_k$ を使う項を捨てて
+\[
+  B_n:=\frac{1}{(n)_k}\sum_{\{i_1,\dots,i_k\}\cap\{1,\dots,k\}=\emptyset}\varphi(X_{i_1},\dots,X_{i_k})
+\]
+とおく．このとき
+\[
+  \bigl|A_n(\varphi)-B_n\bigr|\le\frac{k^2}{n}\sup|\varphi|\longrightarrow0\qquad(n\to\infty).
+\]
+\end{lemma}
+
+$A_n(\varphi)$ から $X_1,\dots,X_k$ を使う項を全部捨てて $B_n$ を作る．
+捨てた分は全体の $k^2/n$ しかないので，値はほとんど動かない．
+
+\begin{lemma}\label{lem:tail}
+\[
+  E\bigl(\varphi(X_1,\dots,X_k)\mid\mathcal{E}\bigr)\in\sigma(X_{k+1},X_{k+2},\dots).
+\]
+\end{lemma}
+
+極限を，$X_1,\dots,X_k$ を使わない量 $B_n$ の極限に置き換える．
+
+\begin{lemma}\label{lem:independent-projection}
+$EX^2<\infty$ とする．$X$ と $Y=E(X\mid\mathcal{G})$ が独立ならば $Y=EX$．
+\end{lemma}
+
+最良予測が予測相手と独立なら定数に潰れる，という一般論を用意する．
+ここで最良予測とは，$\mathcal{G}$-可測な $Z$ の中で $E(X-Z)^2$ を最小にするもののことである．
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.82,>=Stealth]
+% ---------- (a) 一般の場合 ----------
+\begin{scope}
+\fill[gray!12] (-2.6,-1.0) -- (2.6,-1.0) -- (3.4,1.0) -- (-1.8,1.0) -- cycle;
+\draw[gray!55]  (-2.6,-1.0) -- (2.6,-1.0) -- (3.4,1.0) -- (-1.8,1.0) -- cycle;
+\node[gray!60!black,anchor=north west,font=\small] at (-2.6,-1.05) {$L^2(\mathcal{G})$};
+\draw[gray!60!black,thin] (-2.1,-0.6) -- (2.6,0.5)
+  node[anchor=south west,font=\small,gray!50!black,inner sep=1pt] {定数};
+\coordinate (c) at (-1.0,-0.34);
+\coordinate (Y) at (1.2,-0.5);
+\coordinate (X) at (1.2,2.3);
+\draw[thick] (c) -- (Y);
+\draw[thick] (c) -- (X);
+\draw[dashed,thick] (X) -- (Y);
+\draw (Y) ++(0,0.32) -- ++(-0.32,0) -- ++(0,-0.32);
+\pic[draw,gray!50!black,angle radius=0.55cm,angle eccentricity=1.5,"$\theta$"] {angle = Y--c--X};
+\fill (c) circle (1.8pt); \fill (Y) circle (1.8pt); \fill (X) circle (1.8pt);
+\node[anchor=south] at (X) {$X$};
+\node[anchor=north west,inner sep=2pt] at (Y) {$Y$};
+\node[anchor=south east,inner sep=2pt] at ([xshift=-2pt,yshift=2pt]c) {$c=EX$};
+\node[font=\bfseries] at (0.4,-2.0) {(a)};
+\end{scope}
+% ---------- (b) 独立な場合 ----------
+\begin{scope}[xshift=8.2cm]
+\fill[gray!12] (-2.6,-1.0) -- (2.6,-1.0) -- (3.4,1.0) -- (-1.8,1.0) -- cycle;
+\draw[gray!55]  (-2.6,-1.0) -- (2.6,-1.0) -- (3.4,1.0) -- (-1.8,1.0) -- cycle;
+\node[gray!60!black,anchor=north west,font=\small] at (-2.6,-1.05) {$L^2(\mathcal{G})$};
+\draw[gray!60!black,thin] (-2.1,-0.6) -- (2.6,0.5)
+  node[anchor=south west,font=\small,gray!50!black,inner sep=1pt] {定数};
+\coordinate (Y) at (0.3,-0.04);
+\coordinate (X) at (0.3,2.3);
+\draw[dashed,thick] (X) -- (Y);
+\draw (Y) ++(0,0.32) -- ++(-0.32,0) -- ++(0,-0.32);
+\fill (Y) circle (1.8pt); \fill (X) circle (1.8pt);
+\node[anchor=south] at (X) {$X$};
+\node[anchor=north west,inner sep=2pt] at ([yshift=-2pt]Y) {$Y=c=EX$};
+\node[font=\bfseries] at (0.4,-2.0) {(b)};
+\end{scope}
+\end{tikzpicture}
+\caption{(a) 射影だから $Y$ の角は直角．独立性は $\theta$ も直角であることを要求する．
+(b) 直角が2つ入る三角形はつぶれるしかなく，$Y=c=EX$．}
+\label{fig:independent-projection}
+\end{figure}
+
+実際，$c=EX$ とおくと $EY=EX=c$ であり，定数 $c$ は $\mathcal{G}$-可測だから $Y-c\in L^2(\mathcal{G})$ である．
+射影であることから $E[(X-Y)(Y-c)]=0$，すなわち $Y$ の角は直角である．
+一方，$X$ と $Y$ が独立なら $E[(X-c)(Y-c)]=\mathrm{Cov}(X,Y)=0$，すなわち $\theta$ も直角である．
+直角を2つもつ三角形はつぶれるしかないので，$Y=c=EX$ となる．
+
+\begin{lemma}\label{lem:constant}
+$\varphi$ が有界ならば，
+\[
+  E\bigl(\varphi(X_1,\dots,X_k)\mid\mathcal{E}\bigr)=E\varphi(X_1,\dots,X_k).
+\]
+\end{lemma}
+
+極限を定数 $E\varphi(X_1,\dots,X_k)$ に潰す．
+
+以下，$\mathcal{G}_k=\sigma(X_1,\dots,X_k)$ とおく．
+
+\begin{lemma}\label{lem:independent-k}
+任意の $k$ に対して，
+\[
+  \forall A\in\mathcal{E},\ \forall B\in\mathcal{G}_k,\qquad P(A\cap B)=P(A)P(B).
+\]
+\end{lemma}
+
+$\varphi$ を指示関数に取り替えて，Lemma \ref{lem:constant} の主張を事象の独立性に読み替える．
+
+\begin{lemma}\label{lem:independent-all}
+\[
+  \forall A\in\mathcal{E},\ \forall B\in\sigma(X_1,X_2,\dots),\qquad P(A\cap B)=P(A)P(B).
+\]
+\end{lemma}
+
+$k$ を動かして，独立性を $\sigma(X_1,X_2,\dots)$ 全体に広げる．
+
+\begin{lemma}\label{lem:self}
+$P(A\cap A)=P(A)P(A)$ ならば $P(A)\in\{0,1\}$．
+\end{lemma}
+
+$A$ を自分自身と独立な事象として扱い，$P(A)=P(A)^2$ を解く．
+
+\section{直接数式で表現する}\label{sec:directly}
+
+\S\ref{sec:split} では，証明を操作の列として述べた．
+本節では，その各操作を数式で表し，その数式がなぜ成り立つかを確かめる．
+\S\ref{sec:proof} ですでに厳密に示されている箇所はそちらを参照し，
+\S\ref{sec:proof} で省略されていた箇所だけを補う．
+
+\subsection{証明全体の流れ}\label{subsec:directly-flow}
+
+以下，$k\ge1$ を固定し，$\varphi:S^k\to\mathbb{R}$ は有界可測関数とする．
+(a)〜(e) は，このような任意の $\varphi$ について成り立ち，(f)では$\varphi$として指示関数をとる．
+
+証明全体を数式の列で書くと次のようになる．
+各行は，それまでに示した補題を用いて前の行から得られる．
+右の括弧には，その変形で本質的に用いる事実を記した．
+\begin{align*}
+  &\text{(a)}\quad A_n(\varphi)\circ\pi=A_n(\varphi)
+    &&\text{（和の並べ替え）}\\
+  \Longrightarrow\ &\text{(b)}\quad A_n(\varphi)=E\bigl(\varphi(X_1,\dots,X_k)\mid\mathcal{E}_n\bigr)
+    &&\text{（交換可能性）}\\
+  \Longrightarrow\ &\text{(c)}\quad A_n(\varphi)\longrightarrow E\bigl(\varphi(X_1,\dots,X_k)\mid\mathcal{E}\bigr)
+    &&\text{（Theorem \ref{thm:backwards-convergence}）}\\
+  \Longrightarrow\ &\text{(d)}\quad E\bigl(\varphi(X_1,\dots,X_k)\mid\mathcal{E}\bigr)\in\sigma(X_{k+1},X_{k+2},\dots)
+    &&\text{（不要な項の削除）}\\
+  \Longrightarrow\ &\text{(e)}\quad E\bigl(\varphi(X_1,\dots,X_k)\mid\mathcal{E}\bigr)=E\varphi(X_1,\dots,X_k)
+    &&\text{（独立性，最良予測）}\\
+  \Longrightarrow\ &\text{(f)}\quad P(A\cap B)=P(A)P(B)\quad(A\in\mathcal{E},\ B\in\mathcal{G}_k)
+    &&\text{（$\varphi=\mathbf{1}_C$ ととる）}\\
+  \Longrightarrow\ &\text{(g)}\quad P(A\cap B)=P(A)P(B)\quad(A\in\mathcal{E},\ B\in\sigma(X_1,X_2,\dots))
+    &&\text{（Theorem \ref{thm:pi-lambda}）}\\
+  \Longrightarrow\ &\text{(h)}\quad P(A)=P(A\cap A)=P(A)^2\quad(A\in\mathcal{E}\subset\sigma(X_1,X_2,\dots))
+    &&\text{（$B=A$ とおく）}
+\end{align*}
+
+このうち (c)〜(e) が証明の主線である．
+とくに (d)，すなわち極限が $\varphi(X_1,\dots,X_k)$ と無関係な変数だけで決まることが山場であり，
+(a)，(b) はそのための準備，(f)〜(h) は確率変数についての結論を事象の言葉に直す後処理である．
+以下，\S\ref{sec:split} の4つの段階に沿って各行を確かめる．
+
+\subsection{極限を作る：(a)から(c)へ}\label{subsec:directly-limit}
+
+\paragraph{Lemma \ref{lem:sym}（対称性）．}
+\[
+  A_n(\varphi)\circ\pi=A_n(\varphi)\qquad(\pi\ \text{は}\ n+1,n+2,\dots\ \text{を固定する置換}).
+\]
+\textbf{根拠．}
+$1\le i_1,\dots,i_k\le n$ を満たす相異なる整数の列 $i=(i_1,\dots,i_k)$ の全体を $I_{n,k}$ とする．
+$X_i\circ\pi=X_{\pi(i)}$ より
+\[
+  A_n(\varphi)\circ\pi=\frac{1}{(n)_k}\sum_{i\in I_{n,k}}\varphi\bigl(X_{\pi(i_1)},\dots,X_{\pi(i_k)}\bigr).
+\]
+$\pi$ は $\{1,\dots,n\}$ を $\{1,\dots,n\}$ に写す単射だから，
+$\Pi(i)=(\pi(i_1),\dots,\pi(i_k))$ は $I_{n,k}$ から $I_{n,k}$ への写像であり，
+$\pi^{-1}$ から同じ仕方で作った写像がその逆を与えるので全単射である．
+よって右辺は和の並べ替えにすぎず，$A_n(\varphi)\circ\pi=A_n(\varphi)$．
+したがって任意の可測集合 $B$ について
+$\pi^{-1}\{A_n(\varphi)\in B\}=\{A_n(\varphi)\circ\pi\in B\}=\{A_n(\varphi)\in B\}$ となり，
+$A_n(\varphi)$ は $\mathcal{E}_n$-可測である．
+
+\paragraph{Lemma \ref{lem:same}（取り替え）．}
+\[
+  E\bigl(\varphi(X_{i_1},\dots,X_{i_k})\mid\mathcal{E}_n\bigr)=E\bigl(\varphi(X_1,\dots,X_k)\mid\mathcal{E}_n\bigr).
+\]
+\textbf{根拠．}
+$\pi(j)=i_j\ (1\le j\le k)$ となる，$n+1,n+2,\dots$ を固定する置換 $\pi$ をとる．
+$X_1,X_2,\dots$ は i.i.d. だから，番号をつけ替えても同時分布は変わらない：
+\[
+  (X_1,X_2,\dots)\overset{d}{=}(X_{\pi(1)},X_{\pi(2)},\dots),\qquad\text{すなわち}\qquad P\circ\pi^{-1}=P .
+\]
+（有限次元分布の一致は i.i.d. からただちに従い，筒集合は $\pi$-system だから
+Theorem \ref{thm:pi-lambda} により全体で一致する．）
+よって可積分な $g$ に対し $E[g\circ\pi]=E[g]$ である．
+$A\in\mathcal{E}_n$ に対して $g=\varphi(X_1,\dots,X_k)\mathbf{1}_A$ とおくと，
+$\pi^{-1}A=A$ より $g\circ\pi=\varphi(X_{i_1},\dots,X_{i_k})\mathbf{1}_A$ だから
+\[
+  E\bigl[\varphi(X_{i_1},\dots,X_{i_k})\mathbf{1}_A\bigr]=E\bigl[\varphi(X_1,\dots,X_k)\mathbf{1}_A\bigr]
+  \qquad(A\in\mathcal{E}_n).
+\]
+条件付き期待値の定義より，これは両辺の $\mathcal{E}_n$ による条件付き期待値が一致することを意味する．
+\S\ref{sec:proof} の $(\ast)$ の説明は，この議論を言葉で述べたものである．
+
+\paragraph{Lemma \ref{lem:rewrite}（書き換え）．}
+\[
+  A_n(\varphi)=E\bigl(\varphi(X_1,\dots,X_k)\mid\mathcal{E}_n\bigr).
+\]
+\textbf{根拠．}
+Lemma \ref{lem:sym} より $A_n(\varphi)$ は $\mathcal{E}_n$-可測であるから，
+$E(A_n(\varphi)\mid\mathcal{E}_n)=A_n(\varphi)$．
+条件付き期待値の線形性で和をばらし，Lemma \ref{lem:same} により $(n)_k$ 個の項がすべて
+$E(\varphi(X_1,\dots,X_k)\mid\mathcal{E}_n)$ に等しいことを使う．
+
+\paragraph{Lemma \ref{lem:conv}（極限）．}
+\[
+  A_n(\varphi)\longrightarrow E\bigl(\varphi(X_1,\dots,X_k)\mid\mathcal{E}\bigr)\quad\text{a.s.}
+\]
+\textbf{根拠．}
+\S\ref{sec:proof} の通り．
+$n+1,n+2,\dots$ を固定する置換は $n+2,n+3,\dots$ も固定するから，
+$n$ が増えるほど不変性の要求が強くなって $\mathcal{E}_n$ は減少し，$\mathcal{E}_n\downarrow\mathcal{E}$ となる．
+$\varphi$ は有界だから Theorem \ref{thm:backwards-convergence} が使える．
+
+\medskip\noindent\textbf{この段階の役割．}
+組合せ的に定義された $A_n(\varphi)$ を，減少する $\sigma$-加法族による条件付き期待値の列に書き換えた．
+これによりbackwards martingale の収束定理が使えるようになり，
+極限が $E(\varphi(X_1,\dots,X_k)\mid\mathcal{E})$ として特定される．
+
+\subsection{最初の $k$ 個を消す：(c) から (d) へ}\label{subsec:directly-remove}
+
+\paragraph{Lemma \ref{lem:count}（数え上げ）．}
+$1\le j\le n$に対し，$A_n(\varphi)$に$X_j$が含まれる項の割合は，
+\[
+  \frac{k(n-1)_{k-1}}{(n)_k}=\frac{k}{n}.
+\]
+\textbf{根拠．}
+\S\ref{sec:proof} の計算（$j=1$ の場合）と同じである．
+
+\paragraph{Lemma \ref{lem:approx}（項を捨てる）．}
+\[
+  \bigl|A_n(\varphi)-B_n\bigr|\le\frac{k^2}{n}\sup|\varphi|\longrightarrow0 .
+\]
+\textbf{根拠．}
+$A_n(\varphi)-B_n$ は，$\{i_1,\dots,i_k\}\cap\{1,\dots,k\}\ne\emptyset$ となる項の和を $(n)_k$ で割ったものである．
+その項数は Lemma \ref{lem:count} を $j=1,\dots,k$ に適用して足し合わせれば $k\cdot k(n-1)_{k-1}$ 以下であり，
+各項は $|\varphi|\le\sup|\varphi|$ でおさえられる．
+なお \S\ref{sec:proof} では $X_1$ を含む項だけを評価していたが，
+$X_1,\dots,X_k$ の分をまとめて評価するのがこの補題である．
+
+\paragraph{Lemma \ref{lem:tail}（可測性）．}
+\[
+  E\bigl(\varphi(X_1,\dots,X_k)\mid\mathcal{E}\bigr)\in\sigma(X_{k+1},X_{k+2},\dots).
+\]
+\textbf{根拠．}
+Lemma \ref{lem:conv} と Lemma \ref{lem:approx} より
+\[
+  B_n\longrightarrow E\bigl(\varphi(X_1,\dots,X_k)\mid\mathcal{E}\bigr)\quad\text{a.s.}
+\]
+$B_n$ は $X_{k+1},X_{k+2},\dots$ だけの関数だから，$Z:=\limsup_nB_n$ は
+$\sigma(X_{k+1},X_{k+2},\dots)$-可測であり，上の収束から
+$Z=E(\varphi(X_1,\dots,X_k)\mid\mathcal{E})$ a.s.
+
+ここでは2つのことが両方必要である．
+$B_n$ が $X_1,\dots,X_k$ を\emph{完全に}含まないことは，可測性のために必要である．
+$|A_n(\varphi)-B_n|\to0$ は，極限を変えないために必要である．
+
+\medskip\noindent\textbf{この段階の役割．}
+極限が $\varphi(X_1,\dots,X_k)$ と無関係な変数 $X_{k+1},X_{k+2},\dots$ だけで決まることを示した．
+これが証明の山場である．
+
+\subsection{定数に潰す：(d) から (e) へ}\label{subsec:directly-collapse}
+
+\paragraph{Lemma \ref{lem:independent-projection}（独立な最良予測）．}
+$EX^2<\infty$，$Y=E(X\mid\mathcal{G})$とし，$X$と$Y$が独立であるとする．このとき，
+\[
+  \var(Y)=0,\ \text{すなわち}\ Y=EX.
+\]
+\textbf{根拠．}
+Lemma \ref{lem:durrett-(b)} の証明と同じである．
+その証明で $\mathcal{F}$ は $X$ と $Y$ の独立性を導くためだけに使われているので，
+仮定を「$X$ と $Y$ が独立」に置き換えた．
+幾何的な意味は図 \ref{fig:independent-projection} の通りである．
+
+\paragraph{Lemma \ref{lem:constant}（定数化）．}
+\[
+  E\bigl(\varphi(X_1,\dots,X_k)\mid\mathcal{E}\bigr)=E\varphi(X_1,\dots,X_k).
+\]
+\textbf{根拠．}
+$X=\varphi(X_1,\dots,X_k)$ は $\sigma(X_1,\dots,X_k)$-可測，
+$Y=E(X\mid\mathcal{E})$ は Lemma \ref{lem:tail} より $\sigma(X_{k+1},X_{k+2},\dots)$-可測である．
+$X_1,X_2,\dots$ は独立だから $\sigma(X_1,\dots,X_k)$ と $\sigma(X_{k+1},X_{k+2},\dots)$ は独立で，
+ゆえに $X$と$Y$は独立．Lemma \ref{lem:independent-projection} を $\mathcal{G}=\mathcal{E}$ として適用する．
+
+\medskip\noindent\textbf{この段階の役割．}
+極限が定数 $E\varphi(X_1,\dots,X_k)$ になり，Lemma \ref{lem:permutation} が示された．
+
+\subsection{事象の言葉に直す：(e) から (h) へ}\label{subsec:directly-events}
+
+\paragraph{Lemma \ref{lem:independent-k}（有限個との独立性）．}
+\[
+  P(A\cap B)=P(A)P(B)\qquad(A\in\mathcal{E},\ B\in\mathcal{G}_k).
+\]
+\textbf{根拠．}
+$B\in\mathcal{G}_k$ とすると，ある可測集合 $C\subset S^k$ が存在して
+$B=\{(X_1,\dots,X_k)\in C\}$ と書ける．
+このとき $\mathbf{1}_B=\mathbf{1}_C(X_1,\dots,X_k)$ であり，$\mathbf{1}_C$ は有界可測である．
+Lemma \ref{lem:constant} は任意の有界可測 $\varphi$ について成り立つので，
+$\varphi=\mathbf{1}_C$ ととれて，$E(\mathbf{1}_B\mid\mathcal{E})=P(B)$．
+$A\in\mathcal{E}$ だから，条件付き期待値の定義より
+\[
+  P(A\cap B)=E\bigl[\mathbf{1}_A\mathbf{1}_B\bigr]=E\bigl[\mathbf{1}_A\,E(\mathbf{1}_B\mid\mathcal{E})\bigr]=P(A)P(B).
+\]
+\S\ref{sec:proof} で「任意の有界な $\varphi$ で成り立つから独立」と一言で済ませていた部分である．
+
+\paragraph{Lemma \ref{lem:independent-all}（全体との独立性）．}
+\[
+  P(A\cap B)=P(A)P(B)\qquad(A\in\mathcal{E},\ B\in\sigma(X_1,X_2,\dots)).
+\]
+\textbf{根拠．}
+$A\in\mathcal{E}$ を固定し，\S\ref{sec:proof} と同じく $\mathcal{L}$ をとる．
+\S\ref{sec:proof} の Claim \ref{cl:pi-system}，\ref{cl:subset}，\ref{cl:lambda-system} と
+Theorem \ref{thm:pi-lambda} により，すべての $B\in\sigma(\bigcup_k\mathcal{G}_k)$ について $P(A\cap B)=P(A)P(B)$ が成り立つ．
+$A\in\mathcal{E}$ は任意だったから，$\mathcal{E}$ と $\sigma(\bigcup_k\mathcal{G}_k)$ は独立である．
+
+最後に $\sigma(\bigcup_k\mathcal{G}_k)=\sigma(X_1,X_2,\dots)$ を確かめる．
+各 $k$ について $\mathcal{G}_k=\sigma(X_1,\dots,X_k)\subset\sigma(X_1,X_2,\dots)$ だから
+$\bigcup_k\mathcal{G}_k\subset\sigma(X_1,X_2,\dots)$ であり，右辺は $\sigma$-加法族なので
+\[
+  \sigma\Bigl(\bigcup_k\mathcal{G}_k\Bigr)\subset\sigma(X_1,X_2,\dots).
+\]
+逆に，各 $X_j$ は $\mathcal{G}_j$-可測であり，$\mathcal{G}_j\subset\sigma(\bigcup_k\mathcal{G}_k)$ だから，
+すべての $X_j$ が $\sigma(\bigcup_k\mathcal{G}_k)$-可測である．
+$\sigma(X_1,X_2,\dots)$ はすべての $X_j$ を可測にする最小の $\sigma$-加法族なので
+\[
+  \sigma(X_1,X_2,\dots)\subset\sigma\Bigl(\bigcup_k\mathcal{G}_k\Bigr).
+\]
+よって両者は一致し，主張を得る．
+
+\paragraph{Lemma \ref{lem:self}（自己独立）．}
+\[
+  P(A\cap A)=P(A)P(A)\ \Longrightarrow\ P(A)\in\{0,1\}.
+\]
+\textbf{根拠．}
+$A\cap A=A$ だから，仮定は
+\[
+  P(A)=P(A)^2,\qquad\text{すなわち}\qquad P(A)\bigl(1-P(A)\bigr)=0
+\]
+を意味する．よって $P(A)=0$ または $P(A)=1$ である．
+
+この補題を Theorem \ref{thm:HS} に適用するには，$A\in\mathcal{E}$ が仮定 $P(A\cap A)=P(A)P(A)$ を
+満たすことを確かめればよい．
+$\mathcal{E}_n$ は $\mathcal{F}=\sigma(X_1,X_2,\dots)$ の事象から生成されるので
+$\mathcal{E}\subset\mathcal{E}_1\subset\sigma(X_1,X_2,\dots)$ であり，$A\in\sigma(X_1,X_2,\dots)$ となる．
+したがって Lemma \ref{lem:independent-all} で $B=A$ とおくことができ，$P(A\cap A)=P(A)P(A)$ を得る．
+
+\medskip\noindent\textbf{この段階の役割．}
+確率変数についての主張 (e) を事象の独立性 (f) に読み替え，
+有限個の座標から全体へ広げ (g)，最後に $\mathcal{E}$ 自身に適用して (h) を得た．
+以上で Theorem \ref{thm:HS} が示された．
+
+\begin{thebibliography}{9}
+\addcontentsline{toc}{section}{参考文献}
+\bibitem{Durrett}
+R.~Durrett,
+\textit{Probability: Theory and Examples},
+5th ed.,
+Cambridge University Press, 2019.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,42 @@
+\documentclass{jlreq}
+\usepackage{amsmath,amssymb,mathtools,amsthm,enumitem}
+\usepackage[margin=20truemm]{geometry}
+\title{幾何入門2・同演習　期末試験}
+\date{2023年1月25日3限 秋学期（担当：今野）}
+\begin{document}
+\maketitle
+問題用紙1枚，解答用紙1枚（追加は認めない．）
+教科書・ノート持ち込み不可．問題用紙は回収しない．
+\vspace{0.5cm}
+
+[1]次の(1)から(4)において，$\mathbb{R}^2,\mathbb{R}^3$には，それぞれ標準的な距離が定める位相を入れる．また，(2)から(4)において，その部分集合には部分空間としての位相を入れる．
+このとき，次の(1)から(4)はそれぞれ正しいか，正しければ証明し，誤りであればその理由を書きなさい．
+\begin{enumerate}
+\def \labelenumi{(\theenumi)}
+\item $X=\{(x,y) \in \mathbb{R}^2| y>x^2+1\}$は$\mathbb{R}^2$の開集合である．
+\item $Y=\{(x,y) \in \mathbb{R}^2| x^2-3xy+y^2=1\}$はコンパクトである．
+\item $Z=\{(x,y) \in \mathbb{R}^2| 0<x \leq 1 , y=\sin \frac{1}{x}\} \cup \{(0,0)\}$はコンパクトである．
+\item $W=\{(x,y,z) \in \mathbb{R}^3| x^2+y^2-z^2=-1\}$は連結である．
+\end{enumerate}
+
+[2] 次の問いに答えよ．
+\begin{enumerate}
+\def \labelenumi{(\theenumi)}
+\item $(X, d_X)$を距離空間，$p, q$を$X$の異なる2点とする．$\delta=d_X(p,q)$とするとき，$N_X(p;\frac{d}{2}) \cap N_X(q;\frac{d}{2}) =\emptyset$が成り立つことを示しなさい．
+\item $(X, d_X), (Y,d_Y)$を距離空間とする．$X \times Y=\{(x,y)| x \in X, y \in Y\}$とおく．$(x_1, y_1), (x_2, y_2) \in X \times Y$に対して，$d_{X \times Y}((x_1, y_1), (x_2, y_2))=
+\max \{d_X(x_1, x_2), d_Y(y_1, y_2)\}$と定めるとき，$d_{X \times Y}$は$X \times Y$の距離であることを示しなさい．
+\end{enumerate}
+
+[3] $(X, d_X), (Y,d_Y)$を距離空間とする．
+\begin{enumerate}
+\def \labelenumi{(\theenumi)}
+\item $(X, d_X)$の開集合，すなわち距離$d_X$の定める位相についての開集合，の定義を書きなさい．
+\item 写像 $F: X \rightarrow Y$が$p \in X$で連続であることの定義($\varepsilon, \delta$ 等を用いるもの，すなわち，$X,Y$の距離を用いるもの)を書きなさい．
+\item 写像 $F: X \rightarrow Y$が$p \in X$で連続ないことを$\varepsilon, \delta$等を用いて，また否定$\neg$の記号を用いないで表しなさい．
+\item 写像 $F: X \rightarrow Y$が任意の$p \in X$で(2)の意味で連続であるとする．このとき，$(Y,d_Y)$の任意の開集合$V$に対して，$F^{-1}(V)$は$(X, d_X)$の開集合であることを証明しなさい．
+\end{enumerate}
+
+[4] 次の(1)から(4)は閉曲面の展開図を辺のラベルと向きにより表示したものである．(1)から(4)の閉曲面は，閉曲面の分類定理のリスト$\mathbb{T}(g) (g \geq 0), \mathbb{P}(n) (n \geq 1)$のうち
+どれであるかを，展開図を簡単なものに変えてゆくことにより説明しなさい．\\
+(1) $abcbca^{-1}$ \hspace{0.5cm} (2) $abca^{-1}b^{-1}c^{-1}$ \hspace{0.5cm} (3) $aba^{-1}cbc^{-1}$ \hspace{0.5cm} (4) $abacb^{-1}c^{-1}$
+\end{document}

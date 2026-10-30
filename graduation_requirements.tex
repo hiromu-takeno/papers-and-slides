@@ -1,0 +1,85 @@
+% ▼▼▼ ここからコピーしてください ▼▼▼
+% !TeX program = uplatex
+% !TeX encoding = UTF-8
+
+\documentclass[uplatex,dvipdfmx,paper=a4,fontsize=10pt]{jlreq}
+
+% --- パッケージの導入 ---
+\usepackage{graphicx} % 画像・回転に必要（これがないとエラーになります）
+\usepackage{tabularx} % 表の幅指定
+\usepackage{multirow} % 縦結合
+\usepackage{amssymb}  % 数学記号
+\usepackage{makecell} % セル内改行
+\usepackage{enumitem} % 箇条書きの調整
+
+% --- 自作コマンド（丸囲み数字） ---
+\newcommand{\maru}[1]{\raisebox{.5pt}{\textcircled{\raisebox{-.9pt} {#1}}}}
+
+\begin{document}
+
+\section*{卒業要件表（数学科）（要件表は次ページにも続く）}
+
+\begin{table}[h]
+    \centering
+    \small
+    % 文字サイズを少し調整
+    \begin{tabularx}{\textwidth}{|l|l|l|l|c|c|c|}
+    \hline
+    \multicolumn{2}{|c|}{\multirow{2}{*}{科目区分}} & \multicolumn{2}{c|}{各科目区分における必修・選択必修科目等} & \multicolumn{3}{c|}{合計要件単位数} \\ \cline{5-7} 
+    \multicolumn{2}{|c|}{} & \multicolumn{2}{c|}{※（ ）内は当該科目の単位数を示す} & 内訳 & 合計 & 総計 \\ \hline
+    \multicolumn{2}{|c|}{総合文化} & \multicolumn{2}{l|}{} & 8単位以上 & 8単位以上 & \multirow{10}{*}{\makecell{必修・\\選択必修\\科目を含め\\136単位以上}} \\ \cline{1-6}
+    \multicolumn{2}{|c|}{健康・スポーツ学} & 必修科目 & 健康・スポーツ学1，2 \hfill (各1) & 2単位 & 2単位以上 & \\ \cline{1-6}
+    \multirow{3}{*}{外国語} & 第一外国語 & 必修科目 & \makecell[l]{英語コミュニケーション1，2，3，4 \hfill (各1) \\ 英語リーディング1，2，3，4 \hfill (各1)} & 8単位 & \multirow{3}{*}{14単位以上} & \\ \cline{2-5}
+     & 第二外国語 & 必修科目 & \makecell[l]{独・仏・露・中国語のいずれかの \\ 1a，1b，2a，2b，3，4 \hfill (各1)} & 6単位 & & \\ \cline{2-5}
+     & その他 & \multicolumn{2}{l|}{学部間共通外国語科目（卒業要件算入対象科目のみ）} & 2単位以下 & & \\ \cline{1-6}
+    \multirow{7}{*}{\rotatebox{90}{理系基礎}} & \multirow{3}{*}{A群} & \multirow{3}{*}{必修科目} & \makecell[l]{基礎線形代数1\\基礎線形代数2 \hfill (2) \\ 基礎微分積分1\\基礎微分積分2 \hfill (2) \\ 基礎物理学実験1\\基礎物理学実験2 \hfill (1) \\ 基礎化学実験1\\基礎化学実験2 \hfill (1)} & \multirow{3}{*}{12単位} & \multirow{3}{*}{\makecell{必修科目を含め\\A群から\\12単位以上}} & \\ 
+     & & & & & & \\ 
+     & & & & & & \\ \cline{2-6}
+     & B群(注意1) & 必修科目 & 微分方程式 \hfill (2) & 2単位 & \multirow{2}{*}{\makecell{必修科目を含め\\B群から\\8単位以上}} & \\ \cline{2-5}
+     & \makecell[l]{A群B群の\\物理学・\\化学系} & \multicolumn{2}{l|}{\makecell[l]{基礎実験を除く物理学・化学系14科目の中から、2科目 \\ 4単位以上（B群からの2単位を必ず含め、残り2単位\\はA群B群どちらからでも可）を修得すること。}} & \makecell{\maru{4}単位 \\ \scriptsize(左記要件を\\\scriptsize 満たすこと)} & \makecell{\scriptsize A群、B群の\\\scriptsize 要件単位数に\\\scriptsize 含める} & \\ \hline
+    
+    \multirow{10}{*}{\rotatebox{90}{専門教育}} & \multirow{5}{*}{学科専門} & \multirow{5}{*}{必修科目} & \makecell[l]{数学の方法1\\ベクトル空間論\\ベクトル空間論演習 \\ 代数概論\\代数概論演習 \\ 幾何入門1\\幾何入門2\\幾何入門2演習 \\ 解析学1\\解析学1演習\\解析学2\\解析学2演習\\解析学3\\解析学3演習 \\ 関数論1\\関数論1演習\\関数論2\\関数論2演習 \\ ゼミナールA\\ゼミナールB\\卒業研究1\\卒業研究2} & 48単位 & \multirow{7}{*}{\rotatebox{90}{\makecell{必修・選択必修科目を含め学科専門科目から72単位以上}}} & \multirow{7}{*}{\rotatebox{90}{\makecell{必修・選択必修科目を含め専門教育科目から72単位以上}}} \\ 
+     & & & \hfill (各2, 卒研は各4) & & & \\ \cline{3-5}
+     & & \multirow{3}{*}{\makecell{選択必修\\科目(1)}} & \makecell[l]{代数学1\\代数学1演習\\幾何学1\\幾何学1演習 \\ 解析学4\\常微分方程式1\\常微分方程式2\\数学の方法2 \\ 確率論と統計学1\\数理教育1\\計算理論 \hfill (各2)} & \multirow{3}{*}{\makecell{選択必修\\科目(1)から\\ 6単位以上}} & & \\ 
+     & & & & & & \\ 
+     & & & & & & \\ \hline
+    \end{tabularx}
+\end{table}
+
+\newpage
+
+\begin{table}[h]
+    \centering
+    \small
+    \begin{tabularx}{\textwidth}{|l|l|l|l|c|c|c|}
+    \hline
+    \multirow{8}{*}{\rotatebox{90}{専門教育}} & \multirow{6}{*}{学科専門} & \multirow{3}{*}{\makecell{選択必修\\科目(2)}} & \makecell[l]{代数学2, 代数学2演習, 幾何学2, 幾何学2演習 \\ 解析学5, フーリエ解析, 関数解析, 数理解析 \\ 確率論と統計学2, 数理教育2, 情報社会と情報倫理 \\ 数値計算 \hfill (各2)} & \multirow{3}{*}{\makecell{選択必修\\科目(1)・(2)\\から合計\\ 20単位以上}} & \multirow{6}{*}{\rotatebox{90}{\makecell{必修・選択必修科目を含め学科専門科目から72単位以上}}} & \multirow{10}{*}{\rotatebox{90}{\makecell{必修・選択必修科目を含め専門教育科目から72単位以上}}} \\ 
+     & & & & & & \\ \cline{3-5}
+     & & \multirow{3}{*}{\makecell{選択必修\\科目(3)}} & \makecell[l]{代数学3, 4, 4演習, 幾何学3, 4, 4演習 \\ 解析学展望1, 2, 偏微分方程式 \\ 確率論と統計学3, 機械学習, 知識情報処理 \hfill (各2)} & \multirow{3}{*}{\maru{4}単位以上} & & \\ 
+     & & & & & & \\ 
+     & & & & & & \\ \cline{2-5}
+     & \multicolumn{2}{|l|}{複合領域} & & \multicolumn{1}{c|}{自由選択} & & \\ \hline
+    \multicolumn{4}{|l|}{資格課程設置科目（注意2）} & \multicolumn{1}{c|}{自由選択} & 12単位以下 & \\ \hline
+    \multicolumn{4}{|l|}{グローバル人材育成プログラム科目} & \multicolumn{1}{c|}{自由選択} & 2単位以下 & \\ \hline
+    \multicolumn{4}{|l|}{他学科科目} & \multicolumn{1}{c|}{自由選択} & 20単位以下 & \\ \hline
+    \multicolumn{4}{|l|}{他学部科目} & \multicolumn{1}{c|}{自由選択} & 60単位以下 & \\ \hline
+    \end{tabularx}
+\end{table}
+
+\noindent
+■ ゼミナールB履修条件 \\
+ゼミナールBを履修する年度の春学期の成績が確定した時点において、それまでの修得科目と当該年度の秋学期の履修登録科目を合わせて、卒業研究1，2履修条件を満たすこと。
+
+\noindent
+■ 卒業研究1，2履修条件
+\begin{enumerate}[label=\maru{\arabic*}]
+    \item 基礎線形代数1，2、基礎微分積分1，2、微分方程式、数学の方法1、解析学1、解析学1演習、ゼミナールA、ゼミナールBの単位を修得していること。
+    \item 2，3年次に設置されている学科専門科目（ただし、ゼミナールB、プログラミング演習、及びアルゴリズム演習の3科目は含まない）の中から34単位以上修得していること。
+    \item 上記 (\maru{1}～\maru{2}) 修得単位数を含めて、卒業要件単位を106単位以上修得していること。
+\end{enumerate}
+
+\noindent
+(注意1) 理系基礎科目B群のうち、確率・統計と微分方程式を除く数学科目の履修は認めない。 \\
+(注意2) 数学科教育法I（2単位）...（以下略）
+
+\end{document}

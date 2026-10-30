@@ -1,0 +1,507 @@
+\documentclass[dvipdfmx]{jlreq}
+\usepackage[top=15mm,bottom=15mm,left=15mm,right=15mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathrsfs,bm}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{fancyhdr}
+\usepackage{longtable}
+\usepackage{array}
+
+% 定理環境の設定
+\theoremstyle{definition}
+\newtheorem*{solution}{解答}
+\newtheorem*{explanation}{解説}
+
+% === 修正箇所：式番号のフォーマット変更 ===
+% (1) と小問番号が被らないように (*1) (*2) の形式に変更
+\makeatletter
+\renewcommand{\theequation}{($\ast$\arabic{equation})}
+\makeatother
+% ======================================
+
+\begin{document}
+\title{2025年度 数学 学年末試験 解答・解説}
+\date{}
+\author{}
+\maketitle
+
+\section*{[1] 小問集合（必答）}
+
+\begin{enumerate}[label=(\arabic*)]
+    % (1)
+    \item $4x^2 - y^2 + 2y - 1$ を因数分解せよ．
+    \begin{solution}
+    与式を $y$ について整理し，因数分解の公式を利用する．
+    \begin{align*}
+        4x^2 - (y^2 - 2y + 1) &= (2x)^2 - (y-1)^2 \\
+        &= \{2x + (y-1)\}\{2x - (y-1)\} \\
+        &= \bm{(2x+y-1)(2x-y+1)}
+    \end{align*}
+    \end{solution}
+
+\vspace{5mm}
+
+    % (2)
+    \item 3辺の長さが $7, 8, 13$ である三角形の面積を求めよ．
+    \begin{solution}
+    ヘロンの公式を用いる．$\displaystyle s = \frac{7+8+13}{2} = 14$ より，面積 $S$ は，
+    \begin{align*}
+        S &= \sqrt{s(s-a)(s-b)(s-c)} \\
+          &= \sqrt{14(14-7)(14-8)(14-13)} \\
+          &= \sqrt{14 \cdot 7 \cdot 6 \cdot 1} \\
+          &= \sqrt{2 \cdot 7 \cdot 7 \cdot 2 \cdot 3} = 14\sqrt{3}
+    \end{align*}
+    \textbf{答：} $\bm{14\sqrt{3}}$
+    \end{solution}
+
+\vspace{5mm}
+
+    % (3)
+    \item 3次方程式 $2x^3 + 7x^2 + 2x - 3 = 0$ を解け．
+    \begin{solution}
+    $P(x) = 2x^3 + 7x^2 + 2x - 3$ とおく．$P(-1) = -2 + 7 - 2 - 3 = 0$ より，因数定理から $P(x)$ は $x+1$ を因数に持つ．
+    組立除法などにより因数分解すると，
+    \[ (x+1)(2x^2 + 5x - 3) = 0 \]
+    さらに $2x^2 + 5x - 3 = (2x-1)(x+3)$ と因数分解できるため，
+    \[ (x+1)(2x-1)(x+3) = 0 \]
+    よって，解は $\displaystyle \bm{x = -3, -1, \frac{1}{2}}$
+    \end{solution}
+
+\newpage
+
+    % (4)
+    \item 点 $(3, -4)$ と直線 $5x - 7y + 1 = 0$ の距離を求めよ．
+    \begin{solution}
+    点と直線の距離の公式より，
+    \begin{align*}
+        d &= \frac{|5 \cdot 3 - 7 \cdot (-4) + 1|}{\sqrt{5^2 + (-7)^2}} \\
+          &= \frac{|15 + 28 + 1|}{\sqrt{25 + 49}} \\
+          &= \frac{44}{\sqrt{74}} = \bm{\frac{22\sqrt{74}}{37}}
+    \end{align*}
+    \end{solution}
+
+\vspace{5mm}
+
+    % (5)
+    \item 不等式 $\sqrt{3}\sin x - \cos x \leqq \sqrt{3}$ を解け．ただし，$0 \leqq x < 2\pi$ とする．
+    \begin{solution}
+    左辺を合成する．
+    \begin{align*}
+        2 \left( \frac{\sqrt{3}}{2}\sin x - \frac{1}{2}\cos x \right) &\leqq \sqrt{3} \\
+        2 \sin\left(x - \frac{\pi}{6}\right) &\leqq \sqrt{3} \\
+        \sin\left(x - \frac{\pi}{6}\right) &\leqq \frac{\sqrt{3}}{2}
+    \end{align*}
+    $0 \leqq x < 2\pi$ より $\displaystyle -\frac{\pi}{6} \leqq x - \frac{\pi}{6} < \frac{11\pi}{6}$ である．
+    この範囲で $\displaystyle \sin \left(x - \frac{\pi}{6}\right) \leqq \frac{\sqrt{3}}{2}$ を解くと，
+    \[ -\frac{\pi}{6} \leqq x - \frac{\pi}{6} \leqq \frac{\pi}{3}, \quad \frac{2\pi}{3} \leqq x - \frac{\pi}{6} < \frac{11\pi}{6} \]
+    各辺に $\displaystyle \frac{\pi}{6}$ を加えて，
+    \[ \bm{0 \leqq x \leqq \frac{\pi}{2}, \quad \frac{5\pi}{6} \leqq x < 2\pi} \]
+    \end{solution}
+
+\vspace{5mm}
+
+    % (6)
+    \item $6^{20}$ は何桁の数か．($\log_{10} 2=0.3010, \log_{10} 3=0.4771$)
+    \begin{solution}
+    常用対数をとる．
+    \begin{align*}
+        \log_{10} 6^{20} &= 20 \log_{10} 6 \\
+        &= 20 (\log_{10} 2 + \log_{10} 3) \\
+        &= 20 (0.3010 + 0.4771) \\
+        &= 20 \cdot 0.7781 = 15.562
+    \end{align*}
+    $15 < \log_{10} 6^{20} < 16$ より，$10^{15} < 6^{20} < 10^{16}$ であるから，\textbf{16桁}．
+    \end{solution}
+
+\vspace{5mm}
+
+    % (7)
+    \item 2つのベクトル $\vec{a}=(2,0,-1), \vec{b}=(1,3,-2)$ の両方に垂直で，大きさが $\sqrt{6}$ のベクトル $\vec{p}$ を求めよ．
+    \begin{solution}
+    $\vec{p} = (x, y, z)$ とする．
+    $\vec{p} \perp \vec{a}$ より $2x - z = 0 \iff z = 2x$．
+    $\vec{p} \perp \vec{b}$ より $x + 3y - 2z = 0$．これに $z=2x$ を代入して $x + 3y - 4x = 0 \iff 3y-3x = 0 \iff y = x$．
+    よって $\vec{p} = (x, x, 2x) = x(1, 1, 2)$ と表せる．
+    $|\vec{p}|^2 = 6$ より，$x^2(1^2 + 1^2 + 2^2) = 6 \iff 6x^2 = 6 \iff x = \pm 1$．
+    したがって，
+    \[ \bm{\vec{p} = (1, 1, 2), (-1, -1, -2)} \]
+    \end{solution}
+
+\newpage   
+
+    % (8)
+    \item $a_1=2, 2a_{n+1}=a_n+1$ によって定められる数列 $\{a_n\}$ の一般項を求めよ．
+    \begin{solution}
+    漸化式を変形すると $\displaystyle a_{n+1} = \frac{1}{2}a_n + \frac{1}{2}$．
+    特性方程式 $\displaystyle \alpha = \frac{1}{2}\alpha + \frac{1}{2}$ を解くと $\alpha = 1$．
+    辺々から 1 を引いて $\displaystyle a_{n+1} - 1 = \frac{1}{2}(a_n - 1)$．
+    数列 $\{a_n - 1\}$ は初項 $a_1 - 1 = 1$，公比 $\displaystyle \frac{1}{2}$ の等比数列なので，
+    \[ a_n - 1 = 1 \cdot \left(\frac{1}{2}\right)^{n-1} \iff \bm{a_n = \left(\frac{1}{2}\right)^{n-1} + 1} \]
+    \end{solution}
+
+\vspace{5mm}
+
+    % (9)
+    \item 方程式 $z^4 = 8(-1+\sqrt{3}i)$ を解け．
+    \begin{solution}
+    右辺を極形式で表す．
+    $\displaystyle 8(-1+\sqrt{3}i) = 16\left(-\frac{1}{2} + \frac{\sqrt{3}}{2}i\right) = 16\left(\cos \frac{2\pi}{3} + i\sin \frac{2\pi}{3}\right)$．
+    $z = r(\cos \theta + i\sin \theta)$ ($r>0$) とおくと，ド・モアブルの定理より，
+    \[ r^4(\cos 4\theta + i\sin 4\theta) = 16\left(\cos \frac{2\pi}{3} + i\sin \frac{2\pi}{3}\right) \]
+    両辺の絶対値を比較して，$r^4 = 16 \implies r = 2$ ($r>0$)．
+    偏角を比較して，$\displaystyle 4\theta = \frac{2\pi}{3} + 2k\pi$ ($k=0,1,2,3$) より $\displaystyle \theta = \frac{\pi}{6} + \frac{k\pi}{2}$．
+    \begin{itemize}
+        \item $k=0$ のとき：$\displaystyle z = 2\left(\cos\frac{\pi}{6} + i\sin\frac{\pi}{6}\right) = \sqrt{3} + i$
+        \item $k=1$ のとき：$\displaystyle z = 2\left(\cos\frac{2\pi}{3} + i\sin\frac{2\pi}{3}\right) = -1 + \sqrt{3}i$
+        \item $k=2$ のとき：$\displaystyle z = 2\left(\cos\frac{7\pi}{6} + i\sin\frac{7\pi}{6}\right) = -\sqrt{3} - i$
+        \item $k=3$ のとき：$\displaystyle z = 2\left(\cos\frac{5\pi}{3} + i\sin\frac{5\pi}{3}\right) = 1 - \sqrt{3}i$
+    \end{itemize}
+    よって，$\bm{z = \pm(\sqrt{3}+i), \pm(1-\sqrt{3}i)}$ \textbf{（複合同順）}
+    \end{solution}
+
+\vspace{5mm}
+
+    % (10)
+    \item 極限 $\displaystyle \lim_{x\to-\infty} (\sqrt{x^2+1}+x)$ を求めよ．
+    \begin{solution}
+    $x = -t$ とおくと，$x \to -\infty$ のとき $t \to \infty$．
+    \begin{align*}
+        (\text{与式}) &= \lim_{t\to\infty} (\sqrt{(-t)^2+1} - t) \\
+        &= \lim_{t\to\infty} \frac{(\sqrt{t^2+1}-t)(\sqrt{t^2+1}+t)}{\sqrt{t^2+1}+t} \\
+        &= \lim_{t\to\infty} \frac{(t^2+1)-t^2}{\sqrt{t^2+1}+t} \\
+        &= \lim_{t\to\infty} \frac{1}{\sqrt{t^2+1}+t} \\
+        &= \bm{0}
+    \end{align*}
+    \end{solution}
+\end{enumerate}
+
+\newpage
+
+\section*{[2a] 確率・期待値（The “St. Petersburg paradox.”）}
+
+\begin{enumerate}[label=(\arabic*)]
+    \item 1000円以上もらえる確率．
+    \begin{solution}
+    $k$ 回目に初めて表が出る確率は $p_k = \left(1/2\right)^k$ である．
+    賞金 $2^{k-1}$ が 1000 円以上となる条件は，
+    \[ 2^{k-1} \geqq 1000 \]
+    $2^9 = 512, \ 2^{10} = 1024$ より，$k-1 \geqq 10 \iff k \geqq 11$．
+    求める確率は，11回目以降に初めて表が出る確率の和であるから，初項 $\left(1/2\right)^{11}$，公比 $1/2$ の無限等比級数の和となる．
+    \[ \sum_{k=11}^{\infty} \left(\frac{1}{2}\right)^k = \frac{\left(\frac{1}{2}\right)^{11}}{1 - \frac{1}{2}} = \left(\frac{1}{2}\right)^{10} = \bm{\frac{1}{1024}} \]
+    （別解：10回目までずっと裏が出続ける確率と考えて $\displaystyle\left(\frac{1}{2}\right)^{10} = \frac{1}{1024}$ としてもよい．）
+    \end{solution}
+
+    \item 財産上限がない場合の期待値．
+    \begin{solution}
+    上限がない場合の期待値 $E$ は，
+    \[ E = \sum_{k=1}^{\infty} (\text{賞金}) \times (\text{確率}) = \sum_{k=1}^{\infty} 2^{k-1} \times \left(\frac{1}{2}\right)^k = \sum_{k=1}^{\infty} \frac{1}{2}=\frac{1}{2}+\frac{1}{2}+\cdots=\infty \]
+    これは $\frac{1}{2}$ を無限に加える級数であるため，正の無限大に発散する．
+    よって，求める期待値は\textbf{無限大}．
+    \end{solution}
+
+    \item 全財産が1億円の場合の回数と期待値．
+    \begin{solution}
+    主催者が賞金 $2^{k-1}$ 円を支払える条件は $2^{k-1} \leqq 10^8$ である．
+    両辺の常用対数をとると，
+    \begin{align*}
+        \log_{10} 2^{k-1} &\leqq \log_{10} 10^8 \\
+        (k-1) \log_{10} 2 &\leqq 8 \\
+        0.3010 (k-1) &\leqq 8 \\
+        k-1 &\leqq \frac{8}{0.3010} \approx 26.57
+    \end{align*}
+    これを満たす最大の整数 $k$ は $27$ である．
+    すなわち，コインを投げられる最大の回数は \textbf{27 回}である．
+    
+    また，このときの期待値 $E_{27}$ は，最大回数で表が出なかった場合は賞金0円であることに注意すると，
+    \begin{align*}
+        E_{27} &= \sum_{k=1}^{27} \left( 2^{k-1} \times \left(\frac{1}{2}\right)^k \right) \\
+               &= \sum_{k=1}^{27} \frac{1}{2} \\
+               &= 27 \times \frac{1}{2} = 13.5
+    \end{align*}
+    \textbf{答：最大回数 27 回，期待値 13.5 円}
+    \end{solution}
+
+    \item 参加したいか．
+    \begin{solution}
+    \textbf{（解答例）}
+    参加費が少額（例えば数十円程度）であれば参加したいが，期待値が無限大だからといって高額な参加費（例えば1万円）を払ってまでは参加したくない．\\
+    \textbf{理由：}
+    (2)の結果では期待値は無限大となるが，これは「無限の資金」という非現実的な仮定に基づいている．
+    現実には(3)で示したように資金上限（1億円）が存在し，その場合の期待値はわずか 13.5 円にすぎない．
+    さらに(1)の結果から，1000円以上の賞金が得られる確率は約0.1\%しかなく，ほとんどの場合は数円〜数十円の結果に終わる．
+    したがって，無限大の期待値を根拠に高額な参加費を払うのは合理的ではないと考える．
+    \end{solution}
+\end{enumerate}
+
+\newpage
+
+\section*{[2b] 微分積分（Wallis Integrals）}
+$I_n$を以下のように定める．次の問いに答えよ．
+\[I_n = \int_0^{\frac{\pi}{2}} \sin^n x \, dx\]
+
+\begin{enumerate}[label=(\arabic*)]
+    \item $n=0, 1$ の値を求めよ．
+    \begin{solution}
+    $\displaystyle I_0 = \int_0^{\frac{\pi}{2}} 1 \, dx = [x]_0^{\frac{\pi}{2}} = \bm{\frac{\pi}{2}}$ \\
+    $\displaystyle I_1 = \int_0^{\frac{\pi}{2}} \sin x \, dx = [-\cos x]_0^{\frac{\pi}{2}} = 0 - (-1) = \bm{1}$
+    \end{solution}
+
+    \item $n \geqq 2$ のとき，$I_n = \frac{n-1}{n} I_{n-2}$ を示せ．
+    \begin{solution}
+    \begin{align*}
+        I_n &= \int_0^{\frac{\pi}{2}} \sin^{n-1}x \cdot (-\cos x)' \, dx \\
+        &= [-\sin^{n-1}x \cos x]_0^{\frac{\pi}{2}} + \int_0^{\frac{\pi}{2}} (n-1)\sin^{n-2}x \cos^2 x \, dx \\
+        &= 0 + (n-1) \int_0^{\frac{\pi}{2}} \sin^{n-2}x (1-\sin^2 x) \, dx \\
+        &= (n-1) I_{n-2} - (n-1) I_n
+    \end{align*}
+    移項して $n I_n = (n-1) I_{n-2}$ より示された．
+    \end{solution}
+
+    \item 数列 $\{n I_n I_{n-1}\}$ が一定であることを示し，$\lim_{n \to \infty} \sqrt{n}I_n$ を求めよ．
+    \begin{solution}
+    (2)の結果 $I_n = \frac{n-1}{n} I_{n-2}$ の両辺に $n I_{n-1}$ を掛けると，
+    \[n I_n I_{n-1} = n \cdot \frac{n-1}{n} I_{n-2} \cdot I_{n-1} = (n-1) I_{n-1} I_{n-2}\]
+    となる．これは，数列 $\{ n I_n I_{n-1} \}$ の第 $n$ 項と第 $n-1$ 項が等しいことを意味しており，この値は $n$ によらず一定である．\\
+    その値は $n=1$ のときを考えると，(1)より，$\displaystyle I_0=\frac{\pi}{2}，I_1=1$であるから，
+    \[1 \cdot I_1 \cdot I_0 = 1 \cdot 1 \cdot \frac{\pi}{2} = \frac{\pi}{2}\]
+    したがって，すべての自然数 $n$ において
+    \[n I_n I_{n-1} = \bm{\frac{\pi}{2}} \quad \cdots (\ast)\]
+    である．
+
+    次に，$0 \leqq x \leqq \frac{\pi}{2}$ において $0 \leqq \sin x \leqq 1$ であるから，
+    \[\sin^{n+1} x \leqq \sin^n x \leqq \sin^{n-1} x\]
+    が成り立つ．辺々を積分して
+    \[I_{n+1} \leqq I_n \leqq I_{n-1}\]
+    各辺に $I_n > 0$ を掛けると
+    \[I_{n+1} I_n \leqq I_n^2 \leqq I_n I_{n-1}\]
+    ここで $(\ast)$ より $\displaystyle I_n I_{n-1} = \frac{\pi}{2n}$ である．\\
+    また $(\ast)$ において $n$ を $n+1$ とすると $\displaystyle(n+1)I_{n+1}I_n = \frac{\pi}{2}$ より，$\displaystyle I_{n+1}I_n = \frac{\pi}{2(n+1)}$ となる．\\
+    これらを不等式に代入して
+    \[\frac{\pi}{2(n+1)} \leqq I_n^2 \leqq \frac{\pi}{2n}\]
+    各辺に $n$ を掛けると
+    \[\frac{n}{n+1} \cdot \frac{\pi}{2} \leqq n I_n^2 \leqq \frac{\pi}{2}\]
+    $n \to \infty$ のとき $\displaystyle \frac{n}{n+1} \to 1$ であるから，はさみうちの原理より
+    \[\lim_{n \to \infty} n I_n^2 = \frac{\pi}{2}\]
+    $I_n > 0$ より $\sqrt{n} I_n > 0$ であるので，平方根をとって
+    \[\lim_{n \to \infty} \sqrt{n} I_n = \bm{\sqrt{\frac{\pi}{2}}}\]
+    \end{solution}
+    \item $I_n$の値を求めよ．
+    \begin{solution}
+    (2)で示した漸化式 $\displaystyle I_n = \frac{n-1}{n} I_{n-2}$ を繰り返し用いることで求める．
+    $n$ の偶奇によって場合分けを行う．
+
+    (i) $n$ が偶数のとき， ($n=2k$ とおく．$k \geqq 1$)
+    \begin{align*}
+        I_{2k} &= \frac{2k-1}{2k} I_{2k-2} \\
+               &= \frac{2k-1}{2k} \cdot \frac{2k-3}{2k-2} I_{2k-4} \\
+               &= \cdots \\
+               &= \frac{2k-1}{2k} \cdot \frac{2k-3}{2k-2} \cdots \frac{3}{4} \cdot \frac{1}{2} I_0
+    \end{align*}
+    (1)より $\displaystyle I_0 = \frac{\pi}{2}$ であるから，
+    \[ I_n = \frac{n-1}{n} \cdot \frac{n-3}{n-2} \cdots \frac{3}{4} \cdot \frac{1}{2} \cdot \frac{\pi}{2} \]
+
+    (ii) $n$ が奇数のとき，($n=2k+1$とおく．$k \geqq 1$)
+    \begin{align*}
+        I_{2k+1} &= \frac{2k}{2k+1} I_{2k-1} \\
+                 &= \frac{2k}{2k+1} \cdot \frac{2k-2}{2k-1} I_{2k-3} \\
+                 &= \cdots \\
+                 &= \frac{2k}{2k+1} \cdot \frac{2k-2}{2k-1} \cdots \frac{4}{5} \cdot \frac{2}{3} I_1
+    \end{align*}
+    (1)より $I_1 = 1$ であるから，
+    \[ I_n = \frac{n-1}{n} \cdot \frac{n-3}{n-2} \cdots \frac{4}{5} \cdot \frac{2}{3} \cdot 1 \]
+
+    以上をまとめて，
+    \[
+    I_n = \begin{cases}
+    \dfrac{n-1}{n} \cdot \dfrac{n-3}{n-2} \cdots \dfrac{1}{2} \cdot \dfrac{\pi}{2} & (n \text{が偶数のとき}) \\[10pt]
+    \dfrac{n-1}{n} \cdot \dfrac{n-3}{n-2} \cdots \dfrac{2}{3} \cdot 1 & (n \text{が奇数のとき})
+    \end{cases}
+    \]
+    \end{solution}
+\end{enumerate}
+
+\newpage
+
+\section*{[2c] 複素数平面}
+複素数平面上に 2点 $\mathrm{A}(1)$，$\mathrm{B}(3+2i)$ がある．
+点 $z$ を点 $\mathrm{A}$ を中心として $\frac{\pi}{4}$ だけ回転し，さらに点 $\mathrm{A}$ からの距離を $\sqrt{2}$ 倍した点を $w$ とする．
+以下の問いに答えよ．ただし，$i$ は虚数単位とする．
+
+\begin{enumerate}[label=(\arabic*)]
+    % (1)
+    \item $w$ を $z$ を用いて表せ．
+    \begin{solution}
+    点 $w$ は，点 $z$ を点 $\mathrm{A}(1)$ を中心に $\frac{\pi}{4}$ 回転し，距離を $\sqrt{2}$ 倍した点であるから，
+    \begin{align*}
+        w - 1 &= \sqrt{2} \left( \cos \frac{\pi}{4} + i \sin \frac{\pi}{4} \right) (z - 1) \\
+        w - 1 &= \sqrt{2} \left( \frac{1}{\sqrt{2}} + \frac{1}{\sqrt{2}}i \right) (z - 1) \\
+        w - 1 &= (1+i)(z - 1) \\
+        w &= (1+i)z - (1+i) + 1 \\
+        w &= (1+i)z - i
+    \end{align*}
+    よって，\bm{$w = (1+i)z - i$}
+    \end{solution}
+
+    % (2)
+    \item 点 $z$ が点 $\mathrm{B}$ と一致するとき，$w$ が表す複素数を求めよ．
+    \begin{solution}
+    $z = 3+2i$ を(1)で求めた式に代入する．
+    \begin{align*}
+        w &= (1+i)(3+2i) - i \\
+          &= (3 + 2i + 3i - 2) - i \\
+          &= 1 + 5i - i \\
+          &= 1 + 4i
+    \end{align*}
+    よって，\bm{$w=1 + 4i$}
+    \end{solution}
+
+    % (3)
+    \item 点 $z$ が点 $2$ を中心とする半径 $1$ の円周上を動くとき，点 $w$ はどのような図形を描くか．その図形の名称と方程式を求め，複素数平面上に図示せよ．
+    \begin{solution}
+    点 $z$ は点 $2$ を中心とする半径 $1$ の円周上にあるので，
+    \begin{equation}
+       |z - 2| = 1  \label{circle}
+    \end{equation}
+    (1)の結果 $w = (1+i)z - i$ より，$z$ を $w$ で表すと，
+    \[ (1+i)z = w + i \implies z = \frac{w+i}{1+i} \]
+    これを\ref{circle}に代入して，
+    \begin{align*}
+        \left| \frac{w+i}{1+i} - 2 \right| &= 1 \\
+        \frac{|w+i - 2(1+i)|}{|1+i|} &= 1 \\
+        |w + i - 2 - 2i| &= |1+i| \\
+        |w - (2+i)| &= \sqrt{1^2+1^2} \\
+        |w - (2+i)| &= \sqrt{2}
+    \end{align*}
+    これは，\textbf{点 $2+i$ を中心とする半径 $\sqrt{2}$ の円}を表す．\\
+    方程式は，$\bm{|w - (2+i)| = \sqrt{2}}$．図は以下．\\
+    \textbf{図示：}
+    \begin{center}
+    \begin{tikzpicture}[scale=1.5]
+      \draw[->,>=stealth] (-1,0) -- (4,0) node[right] {$x$ (実軸)};
+      \draw[->,>=stealth] (0,-1) -- (0,3.5) node[above] {$y$ (虚軸)};
+      \node at (0,0) [below left] {O};
+      
+      % 円の中心と円
+      \coordinate (C) at (2,1);
+      \draw[thick] (C) circle ({sqrt(2)});
+      \fill (C) circle (1.5pt) node[above right] {$2+i$};
+      
+      % 補助線
+      \draw[dashed] (2,0) node[below]{2} -- (C) -- (0,1) node[left]{1};
+      
+      % 半径の表示
+      \draw[<->, dashed] (C) -- ++({sqrt(2)},0) node[midway, below] {$\sqrt{2}$};
+    \end{tikzpicture}
+    \end{center}
+    \end{solution}
+
+    % (4)
+    \item (3)で求めた図形上の点を $\mathrm{P}(w)$ とする．原点 $\mathrm{O}$ からこの円へ引いた接線の接点を表す複素数を求めよ．
+    \begin{solution}
+    円の中心を $\mathrm{C}(2+i)$，半径を $r=\sqrt{2}$ とする．
+    原点から引いた接線の接点を $\mathrm{T}(w)$ とすると，$\triangle \mathrm{OCT}$ は $\angle \mathrm{OTC} = 90^\circ$ の直角三角形となる．
+    \[ \mathrm{OC} = |2+i| = \sqrt{2^2+1^2} = \sqrt{5} \]
+    三平方の定理より，接点までの距離 $\mathrm{OT}$ は，
+    \[ \mathrm{OT} = \sqrt{\mathrm{OC}^2 - r^2} = \sqrt{5 - 2} = \sqrt{3} \]
+    ここで，接点 $\mathrm{T}$ は，ベクトル $\vec{\mathrm{OC}}$ を原点 $\mathrm{O}$ を中心に回転・縮小した位置にある．
+    回転角を $\pm \theta$ とすると，$\triangle \mathrm{OCT}$ において
+    \[ \cos \theta = \frac{\mathrm{OT}}{\mathrm{OC}} = \frac{\sqrt{3}}{\sqrt{5}}, \quad \sin \theta = \frac{\mathrm{CT}}{\mathrm{OC}} = \frac{\sqrt{2}}{\sqrt{5}} \]
+    である．また，縮小率は $\displaystyle\frac{\mathrm{OT}}{\mathrm{OC}} = \frac{\sqrt{3}}{\sqrt{5}}$ である．
+    よって，求める接点 $w$ は，複素数 $2+i$ に $\displaystyle\frac{\sqrt{3}}{\sqrt{5}} (\cos \theta \mp i \sin \theta)$ を掛けたものである（接線は2本あるため回転方向は $\mp \theta$ となる）．
+    \begin{align*}
+        w &= (2+i) \cdot \frac{\sqrt{3}}{\sqrt{5}} \left( \frac{\sqrt{3}}{\sqrt{5}} \mp i \frac{\sqrt{2}}{\sqrt{5}} \right) \\
+          &= (2+i) \frac{\sqrt{3}}{5} (\sqrt{3} \mp i\sqrt{2}) \\
+          &= \frac{\sqrt{3}}{5} \left\{ (2\sqrt{3} \pm \sqrt{2}) + i(\sqrt{3} \mp 2\sqrt{2}) \right\} \quad (\text{複号同順})
+    \end{align*}
+    計算を整理すると，
+    \begin{align*}
+        w_1 &= \frac{\sqrt{3}}{5} (2\sqrt{3} + \sqrt{2} + i\sqrt{3} - 2i\sqrt{2}) = \frac{6+\sqrt{6}}{5} + i \frac{3-2\sqrt{6}}{5} \\
+        w_2 &= \frac{\sqrt{3}}{5} (2\sqrt{3} - \sqrt{2} + i\sqrt{3} + 2i\sqrt{2}) = \frac{6-\sqrt{6}}{5} + i \frac{3+2\sqrt{6}}{5}
+    \end{align*}
+    よって，
+    \[ \bm{w = \frac{6 \pm \sqrt{6}}{5} + i \frac{3 \mp 2\sqrt{6}}{5} \quad (\text{複号同順})} \]
+    \end{solution}
+\end{enumerate}
+
+\newpage
+
+\section*{【別紙】採点基準表}
+
+\subsection*{採点方針（共通事項）}
+\begin{itemize}
+    \item \textbf{方針点}：答えが間違っていても，正しい解法の方針（立式や定理の適用）が記述されていれば点数を与える．
+    \item \textbf{計算点}：方針が正しく，途中の計算処理が正確に行われている場合に点数を与える．
+    \item \textbf{完答点}：最終的な答えが合っている場合に点数を与える．
+    \item 以前の設問の結果を利用する場合（(3)を解くために(2)の結果を使うなど），前の設問が間違っていて答えが合わなくても，論理的に正しい手順で解いていれば，その設問の「方針点」「計算点」は与える（雪だるま式減点は避ける）．
+\end{itemize}
+
+\subsection*{[1] 小問集合（各5点・計50点）}
+最終結果のみで採点する．部分点はない．
+
+\subsection*{[2a] 確率・期待値（計50点）}
+\begin{longtable}{|c|p{11cm}|c|}
+\hline
+小問 & \multicolumn{1}{c|}{詳細採点基準} & 配点 \\ \hline
+(1) & ・$2^{k-1} \geqq 1000$を導出． & 2\\
+    & ・$k \geqq 11$ を導出．& 2 \\
+    & ・初項 $(1/2)^{11}$，公比 $1/2$ の等比級数の和の式，\par または余事象 $1 - \sum_{k=1}^{10}(1/2)^k$ の式が書かれている． & 3 \\
+    & ・最終結果$\frac{1}{1024}$を導出． & 3 \\ \hline
+(2) & ・$\sum_{k=1}^{\infty} 2^{k-1} \times \left(\frac{1}{2}\right)^k$ が立式できている． & 6 \\
+    & ・$\sum_{k=1}^{\infty} \frac{1}{2}$ と変形できている． & 2 \\
+    & ・最終結果，無限大 ($\infty$)を導出． & 4 \\ \hline
+(3) & ・常用対数を取って，$\log_{10} 2^{k-1} \leqq \log_{10} 10^8$を書いている．& 3 \\
+    & ・$k-1 \leqq \frac{8}{0.3010} \approx 26.57$を導出．& 2 \\
+    & ・最大の整数$k$を考え，27回であることを特定． & 4 \\
+    & ・$\sum_{k=1}^{27} \left( 2^{k-1} \times \left(\frac{1}{2}\right)^k \right)$を立式．& 3 \\
+    & ・最終結果13.5円を導出． & 4 \\ \hline
+(4) & ・参加する・しないの明記． & 2 \\
+    & ・期待値が13.5円であることや，高額当選確率の低さ($0.1\%$)など，前問までの結果に正しく触れている． & 6 \\
+    & ・上記根拠に基づき，参加費との兼ね合いで参加意思と矛盾のない合理的な判断を下している． & 4 \\ \hline
+\end{longtable}
+
+\newpage
+
+\subsection*{[2b] 微分積分（計50点）}
+\begin{longtable}{|c|p{11cm}|c|}
+\hline
+小問 & \multicolumn{1}{c|}{詳細採点基準} & 配点 \\ \hline
+(1) & ・$I_0 = \pi/2$が求められている． & 2 \\
+    & ・$I_1 = 1$が求められている． & 3 \\ \hline
+(2) & ・部分積分法を用い，$\int \sin^{n-1}x (-\cos x)' dx$ としている． & 4 \\
+    & ・$I_n=(n-1) I_{n-2} - (n-1) I_n$の導出． & 6 \\
+    & ・結論の導出． & 2 \\ \hline
+(3) & ・$nI_nI_{n-1} = (n-1)I_{n-1}I_{n-2}$の導出．& 2 \\
+    & ・上の式が$n$によらず一定であることに言及． & 2 \\
+    & ・$nI_nI_{n-1}=\frac{\pi}{2}$ の導出． & 1 \\
+    & ・$I_{n+1} I_n \leqq I_n^2 \leqq I_n I_{n-1}$ を導出． & 4 \\
+    & ・$I_{n+1}I_n = \frac{\pi}{2(n+1)}$を導出． & 2 \\
+    & ・最終結果$\sqrt{\frac{\pi}{2}}$ を導出． & 4 \\ \hline
+(4) & ・$n$の偶奇で場合分けをしている． & 1 \\
+    & ・$n$が偶数の場合で，(2)の漸化式を正しく用いている．& 3 \\
+    & ・$n$が偶数の場合の最終結果を導出できている． & 4 \\
+    & ・$n$が奇数の場合で，(2)の漸化式を正しく用いている．& 3 \\
+    & ・$n$が奇数の場合の最終結果を導出できている． & 4 \\ \hline
+\end{longtable}
+
+\subsection*{[2c] 複素数平面（計50点）}
+\begin{longtable}{|c|p{11cm}|c|}
+\hline
+小問 & \multicolumn{1}{c|}{詳細採点基準} & 配点 \\ \hline
+(1) & ・$w - 1 = \sqrt{2} \left( \cos \frac{\pi}{4} + i \sin \frac{\pi}{4} \right) (z - 1)$が書いてある．& 5 \\
+    & ・最終結果$w = (1+i)z - i$を導出できている． & 5 \\ \hline
+(2) & ・$w = (1+i)(3+2i) - i$と代入できている．& 2 \\ 
+    & ・最終結果$w=1+4i$を導出できている． & 3 \\ \hline
+(3) & ・\ref{circle}の式が書かれている．& 2 \\
+    & ・逆変換 $z=\frac{w+i}{1+i}$ が導出できている．& 3 \\
+    & ・方程式 $|w-(2+i)|=\sqrt{2}$ を導出できている． & 5 \\
+    & ・中心 $2+i$，半径 $\sqrt{2}$ の円，と名称が書けている． & 2 \\ 
+    & ・図示が正しくできている．& 2 \\\hline
+(4) & ・$\mathrm{OC}$の長さが導出できている．& 2 \\
+    & ・$\mathrm{OT}$の長さが導出できている．& 2 \\
+    & ・縮小率が求められている．& 4 \\
+    & ・$w = (2+i) \cdot \frac{\sqrt{3}}{\sqrt{5}} \left( \frac{\sqrt{3}}{\sqrt{5}} \mp i \frac{\sqrt{2}}{\sqrt{5}} \right)$が立式できている． & 5 \\
+    & ・$w= \frac{\sqrt{3}}{5} \left\{ (2\sqrt{3} \pm \sqrt{2}) + i(\sqrt{3} \mp 2\sqrt{2}) \right\}$と変形できている．& 5 \\
+    & ・$w=\frac{6 \pm \sqrt{6}}{5} + i \frac{3 \mp 2\sqrt{6}}{5}$ と整理できている．& 3 \\ \hline
+\end{longtable}
+
+\end{document}

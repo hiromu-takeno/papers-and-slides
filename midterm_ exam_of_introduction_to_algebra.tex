@@ -1,0 +1,170 @@
+\documentclass[a4paper,11pt]{jsarticle}
+\usepackage[margin=1cm]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{multicol}
+
+% ページ番号を消す設定
+\pagestyle{empty}
+
+% ページを真ん中で分ける線の設定
+\setlength{\columnsep}{1cm}
+\setlength{\columnseprule}{0.4pt}
+
+\newcommand{\testheader}{
+\begin{center}
+{\large 代数概論・同演習 中間テスト(11/16)}\\[1em]
+\underline{\hspace{1cm}}年\underline{\hspace{1cm}}組\underline{\hspace{1cm}}番\hspace{0.5cm}名前\underline{\hspace{6cm}}
+\end{center}
+}
+
+\begin{document}
+
+% ==========================================
+% 1枚目 表 (1ページ目: IMG_6467)
+% ==========================================
+\testheader
+
+\begin{multicols*}{2}
+% 領域1
+\noindent
+\textbf{問1.}\quad 次の言葉を説明せよ．\\[0.5em]
+(1)[3点] 多項式の次数
+\vspace{4cm}
+
+\noindent
+(2)[3点] $\operatorname{ord}_m(\bar{r})$, ただし $m \in \mathbb{N}$ で $\bar{r} \in (\mathbb{Z}/m\mathbb{Z})^{\times}$ とする．
+\vspace{4cm}
+
+\noindent
+(3)[3点] フェルマーの小定理
+\vspace{4cm}
+
+\noindent
+(4)[3点] 既約剰余類
+\vspace{4cm}
+
+\noindent
+(5)[3点] 環 $R$ の既約元
+\vspace{4cm}
+
+\vfill\null
+\columnbreak
+
+% 領域2
+\noindent
+\textbf{問2.}[6点] $a, b, s \in \mathbb{Z}$, $m \in \mathbb{N}$ とする．$sa \equiv sb \pmod m$ で $\gcd(s, m) = 1$ ならば $a \equiv b \pmod m$ となることを示せ．
+\vspace{11cm}
+
+\noindent
+\textbf{問3.}[6点] $\bar{r} \in (\mathbb{Z}/m\mathbb{Z})^{\times}$ に対し $l = \operatorname{ord}_m(\bar{r})$ とする．このとき，$\bar{r}^n = \bar{r}^m$ ならば $n \equiv m \pmod l$ となることを示せ．
+\vspace{11cm}
+
+\vfill\null
+\end{multicols*}
+
+\newpage
+
+% ==========================================
+% 1枚目 裏 (2ページ目: IMG_6468)
+% ==========================================
+\begin{multicols*}{2}
+% 領域3
+\noindent
+\textbf{問4.}\quad $K$ を $\mathbb{C}$ の部分体とし，多項式環 $K[x]$ を考える．\\
+(1)[6点] $f(x), g(x) \in K[x]$ に対し
+\[ \deg(f(x) + g(x)) \le \max\{\deg f(x), \deg g(x)\} \]
+であり，さらに $\deg f(x) \ne \deg g(x)$ なら等号が成立することを示せ．
+\vspace{10cm}
+
+\noindent
+(2)[6点] $K[x]^{\times} = K \setminus \{0\}$ を示せ．
+\vspace{10cm}
+
+\vfill\null
+\columnbreak
+
+% 領域4
+\noindent
+(3)[6点] $f(x), g(x) \in K[x]$ で $g(x) \ne 0$ とする．このとき，
+\[ f(x) = h(x)g(x) + r(x) \quad (\deg r(x) < \deg g(x)) \]
+を満たす $h(x), r(x) \in K[x]$ が存在することを示せ．
+\vspace{14cm}
+
+\noindent
+(4)[6点] 上で求めた $h(x), r(x)$ は一意的であることを示せ．
+
+\vfill\null
+\end{multicols*}
+
+\newpage
+
+% ==========================================
+% 2枚目 表 (3ページ目: IMG_6469)
+% ==========================================
+\testheader
+
+\begin{multicols*}{2}
+% 領域5
+\noindent
+\textbf{問5.}[4点] $(\mathbb{Z}/13\mathbb{Z})^{\times}$ において $\bar{7}^k = \bar{a}$ となる $1 \le a \le 12$ を求めて下の表を埋めよ。\\[0.5em]
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+$k$ & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
+$a$ &  &  &  &  &  & \\ \hline
+$k$ & 7 & 8 & 9 & 10& 11& 12\\ \hline
+$a$ &  &  &  &  &  &  \\ \hline
+\end{tabular}
+\vspace{4cm}
+
+\noindent
+\textbf{問6.}[6点] $20^{123}$ を $13$ で割った余りを求めよ．
+\vspace{7.5cm}
+
+\noindent
+\textbf{問7.}[6点] $x^5 \equiv 2 \pmod{13}$ を満たす整数 $x$ を求めよ．
+\vspace{8cm}
+
+\vfill\null
+\columnbreak
+
+% 領域6
+\noindent
+\textbf{問8.}\quad $a_1 = 154, a_2 = 231, a_3 = 210$ に対して以下の問いに答えよ．\\
+(1)[3点] $d = \operatorname{GCD}(a_1, a_2, a_3)$ を求めよ．\\
+(2)[6点] $d = k_1 a_1 + k_2 a_2 + k_3 a_3$ を満たす整数 $k_1, k_2, k_3$ を一組求めよ．
+
+\vfill\null
+\end{multicols*}
+
+\newpage
+
+% ==========================================
+% 2枚目 裏 (4ページ目: IMG_6470)
+% ==========================================
+\begin{multicols*}{2}
+% 領域7
+\noindent
+\textbf{問9.}\quad $\omega = \frac{-1 + \sqrt{-3}}{2}$ とおく．このとき $\mathbb{Z}[\omega] = \{a + b\omega \mid a, b \in \mathbb{Z}\}$ は $\mathbb{C}$ の部分環となることがいえる．また $\alpha \in \mathbb{C}$ に対し、$N(\alpha) = |\alpha|^2$ と定める．次の問いに答えよ．\\[0.5em]
+(1)[4点] $\alpha = a + b\omega \in \mathbb{Z}[\omega]$ に対し $N(\alpha)$ を $a, b$ の式で表せ．
+\vspace{6.5cm}
+
+\noindent
+(2)[6点] $N(\alpha) = 3$ となる $\alpha \in \mathbb{Z}[\omega]$ を一つ求めよ．
+\vspace{7.5cm}
+
+\noindent
+(3)[6点] 単元の集合 $\mathbb{Z}[\omega]^{\times}$ を求めよ．
+\vspace{8.5cm}
+
+\vfill\null
+\columnbreak
+
+% 領域8
+\noindent
+\textbf{問10.}[8点] 有理式 $\displaystyle P(x) = \frac{1}{(x+1)^2(x^2+1)}$ を有理数の範囲で部分分数展開せよ．
+\vspace{24cm}
+
+\vfill\null
+\end{multicols*}
+
+\end{document}

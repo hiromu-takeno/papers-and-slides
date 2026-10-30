@@ -1,0 +1,174 @@
+\documentclass[a4paper,11pt]{jsarticle}
+\usepackage[margin=1cm]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{multicol}
+
+% ページ番号を消す設定
+\pagestyle{empty}
+
+% ページを真ん中で分ける線の設定
+\setlength{\columnsep}{1cm}
+\setlength{\columnseprule}{0.4pt}
+
+\newcommand{\testheader}{
+\begin{center}
+{\large 代数概論・同演習 期末試験(2024/1/26)}\\[1em]
+\underline{\hspace{1cm}}年\underline{\hspace{1cm}}組\underline{\hspace{1cm}}番\hspace{0.5cm}名前\underline{\hspace{6cm}}
+\end{center}
+}
+
+\begin{document}
+% ==========================================
+% ヘッダー (1ページ目の全体の上)
+% ==========================================
+\noindent
+%\newcommand{\testheader}{
+%\begin{center}
+%{\large 代数概論 期末試験(2024/1/26)}\\[1em]
+%\underline{\hspace{1cm}}年\underline{\hspace{1cm}}組\underline{\hspace{1cm}}番\hspace{0.5cm}名前\underline{\hspace{6cm}}
+%\end{center}
+%\begin{multicols*}{2}
+%}
+
+% ==========================================
+% 1ページ目 左側 (領域1)
+% ==========================================
+\testheader
+\begin{multicols*}{2}
+
+\noindent
+\textbf{問1.}\quad 次の用語や定理について説明せよ．\\[1em]
+(1)[3点] 最小多項式
+\vspace{4cm}
+
+\noindent
+(2)[3点] 長さ $l$ の巡回置換
+\vspace{4cm}
+
+\noindent
+(3)[3点] 代数的数
+\vspace{4cm}
+
+\noindent
+(4)[3点] アイゼンシュタインの既約判定法
+\vspace{4cm}
+
+\noindent
+(5)[3点] 対称群の元 $\sigma$ の位数
+\vspace{4cm}
+
+\vfill\null
+\columnbreak
+% ==========================================
+% 1ページ目 右側 (領域2)
+% ==========================================
+\noindent
+\textbf{問2.}[7点] 整数係数モニック多項式 $f(x)$ について，有理数 $r$ が $f(r)=0$ を満たすならば，$r$ は整数であることを示せ．
+\vspace{15cm}
+
+\noindent
+\textbf{問3.}[4点] 変数 $x_1, x_2, x_3$ からなる次の7つの単項式を，辞書式順序で並べ替えよ．\\[1em]
+$x_1^2 x_2, \quad x_1x_2^3, \quad x_1 x_2 x_3, \quad x_2x_3, \quad x_1 x_3^2, \quad x_1^3, \quad x_2^2 x_3$
+\vspace{7cm}
+
+\vfill\null
+
+\newpage
+% ==========================================
+% 2ページ目 左側 (領域3)
+% ==========================================
+\noindent
+\textbf{問4.}\quad 対称群 $\mathfrak{S}_9$ の元 $\sigma$ を次のように定める．
+$$\sigma = \begin{pmatrix} 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\ 3 & 5 & 1 & 6 & 2 & 4 & 9 & 7 & 8 \end{pmatrix}$$
+次の問いに答えよ．\\
+(1)[4点] $\sigma$ を巡回置換の積として表せ．
+\vspace{4cm}
+
+\noindent
+(2)[4点] $\sigma$ の位数を求めよ．
+\vspace{4cm}
+
+\noindent
+(3)[4点] $\sigma$ を互換の積として表せ．
+\vspace{4cm}
+
+\noindent
+(4)[4点] $\sigma^2$を求めよ．
+\vspace{4cm}
+
+\noindent
+(5)[4点] 逆元 $\sigma^{-1}$ を求めよ．
+\vspace{4cm}
+
+\vfill\null
+\columnbreak
+% ==========================================
+% 2ページ目 右側 (領域4)
+% ==========================================
+\noindent
+\textbf{問5.}[8点] 多項式 $f(x) = 1$ と $g(x) = b_m x^m + b_{m-1}x^{m-1} + \dots + b_0$ について，終結式$R_{1,m}(f,g)$を計算せよ．
+\vspace{22cm}
+
+\vfill\null
+\end{multicols*}
+\newpage
+% ==========================================
+% 3ページ目 左側 (領域5)
+% ==========================================
+\testheader
+\begin{multicols*}{2}
+\noindent
+\textbf{問6.}\quad 多項式 $f(x) = a_n x^n + \dots + a_1 x + a_0$ と $g(x) = b_m x^m + \dots + b_1 x + b_0$ について，次の問いに答えよ．\\[0.5em]
+(1)[5点] 積 $f(x)g(x)$ を$a_n$と$b_n$を用いて表せ．
+\vspace{7cm}
+
+\noindent
+(2)[7点] $f(x)$と$g(x)$が原始多項式のとき，積$f(x)g(x)$も原始多項式となることを示せ．
+\vspace{14.5cm}
+
+\vfill\null
+\columnbreak
+% ==========================================
+% 3ページ目 右側 (領域6) 
+% ==========================================
+\noindent
+\textbf{問7.}\quad 次の多項式が有理数体 $\mathbb{Q}$ 上既約であることを示せ．\\
+(1)[5点] $x^4 - 14x^3 + 21x^2 - 35x + 14$
+\vspace{7cm}
+
+\noindent
+(2)[5点] $x^4 + x^3 + x^2 + x + 1$
+\vspace{7cm}
+
+\noindent
+(3)[5点] $x^3 - x - 1$
+\vspace{7cm}
+
+\vfill\null
+\newpage
+% ==========================================
+% 4ページ目 左側 (領域7)
+% ==========================================
+\noindent
+\textbf{問8.}\quad 変数$x,y,z,w$について，次の問いに答えよ．\\
+(1)[4点] 4次基本対称式 $e_1, e_2, e_3, e_4$ をそれぞれ求めよ．
+\vspace{5cm}
+
+\noindent
+(2)[7点] 次の対称式を，基本対称式 $e_1, e_2, e_3, e_4$ を用いて表せ．
+$$ f(x,y,z,w)=x^3 + y^3 + z^3 + w^3 - 4xyzw$$ 
+\vspace{10cm}
+
+\vfill\null
+\columnbreak
+% ==========================================
+% 4ページ目 右側 (領域8)
+% ==========================================
+\noindent
+\textbf{問9.}[8点] 次の式は交代式である．因数分解せよ．
+$$ f(x,y,z)=x^4(y-z) + y^4(z-x) + z^4(x-y) $$
+\vspace{22cm}
+
+\vfill\null
+\end{multicols*}
+\end{document}
